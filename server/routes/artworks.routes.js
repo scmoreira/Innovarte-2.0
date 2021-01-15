@@ -7,9 +7,9 @@ const uploader = require('../configs/cloudinary.config');
 const Artworks = require('../models/artwork.model');
 
 const checkLoggedIn = (req, res, next) => req.isAuthenticated() ? next()
-    : console.log('No autorizado!')
+    : console.log('Not authorized!')
 const checkRole = rolesToCheck => (req, res, next) => req.isAuthenticated() &&
-    rolesToCheck.includes(req.user.role) ? next() : console.log('No autorizado!')
+    rolesToCheck.includes(req.user.role) ? next() : console.log('Not authorized!')
 
 // Endpoints
 
@@ -69,7 +69,7 @@ router.get('/getAvailableArtworks', (req, res) => {
 });
 
 // Add an artwork
-router.post('/newArtwork', uploader.single('image'), checkLoggedIn, checkRole('artista'), (req, res) => {
+router.post('/newArtwork', uploader.single('image'), checkLoggedIn, checkRole('artist'), (req, res) => {
 
     const { title, description, price, currency, size, materials, artist, owner, tags } = req.body
     const imageFile = req.file.url;
@@ -83,7 +83,7 @@ router.post('/newArtwork', uploader.single('image'), checkLoggedIn, checkRole('a
 });
 
 // Update an artwork
-router.put('/editArtwork/:artwork_id', uploader.single('image'), checkLoggedIn, checkRole('artista'), (req, res) => {
+router.put('/editArtwork/:artwork_id', uploader.single('image'), checkLoggedIn, checkRole('artist'), (req, res) => {
 
     const artwork = req.params.artwork_id;
     const { title, description, price, currency, size, materials, artist, owner, tags } = req.body;
@@ -119,7 +119,7 @@ router.put('/artworkSold/:artwork_id', checkLoggedIn, (req, res) => {
 });
 
 // Delete an artwork
-router.delete('/:artwork_id/deleteArtwork', checkLoggedIn, checkRole('artista', 'admin'), (req, res) => {
+router.delete('/:artwork_id/deleteArtwork', checkLoggedIn, checkRole('artist', 'admin'), (req, res) => {
 
     const artwork = req.params.artwork_id;
 

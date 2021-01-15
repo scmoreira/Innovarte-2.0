@@ -64,7 +64,7 @@ router.post('/signup', (req, res) => {
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', (err, theUser, failureDetails) => {
         if (err) {
-            res.status(500).json({ message: 'Error de autenticación' })
+            res.status(500).json({ message: 'Authentication Error' })
             return
         }
 
@@ -75,7 +75,7 @@ router.post('/login', (req, res, next) => {
 
         req.login(theUser, (err) => {
             if (err) {
-                res.status(500).json({ message: 'Error de sesión' })
+                res.status(500).json({ message: 'Session Error' })
                 return
             }
 
@@ -86,7 +86,7 @@ router.post('/login', (req, res, next) => {
 
 router.post('/logout', (req, res) => {
     req.logout()
-    res.status(200).json({ message: 'Sesión cerrada!' })
+    res.status(200).json({ message: 'Session closed successfully!' })
 });
 
 router.get('/loggedin', (req, res) => {
@@ -94,7 +94,7 @@ router.get('/loggedin', (req, res) => {
         res.status(200).json(req.user)
         return
     }
-    res.status(403).json({ message: 'Sin autorización' })
+    res.status(403).json({ message: 'Not authorized' })
 })
 
 module.exports = router

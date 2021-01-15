@@ -34,8 +34,8 @@ const artworkSchema = new Schema({
     },
     tags: {
         type: String,
-        enum: ['Pintura', 'Escultura', 'Dibujo', 'Artesanía', 'Fotografía', 'Otros'],
-        default: 'Otros'
+        enum: ['Painting', 'Sculpture', 'Drawing', 'Crafts', 'Photography', 'Others'],
+        default: 'Others'
     },
     artist: {
         type: String,
