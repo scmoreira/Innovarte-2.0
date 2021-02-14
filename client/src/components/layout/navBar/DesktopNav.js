@@ -1,15 +1,17 @@
 import React from 'react';
-import { Link as RouterLink } from "react-router-dom";
+import { HashLink as Link } from 'react-router-hash-link'
 
 import NavLinks from './NavLinks';
 import CartIcon from './CartIcon';
 import Logout from './Logout';
 
 import { Button } from '@material-ui/core';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import useStyles from './navBar.styles';
 
 const GetNavLinks = () => {
 
+    const trigger = useScrollTrigger({ threshold: 100 });
     const classes = useStyles();
 
     return NavLinks.map( props => {
@@ -18,8 +20,8 @@ const GetNavLinks = () => {
                 {...{
                     ...props,
                     key: props.label,
-                    component: RouterLink,
-                    className: classes.navLinks,
+                    component: Link,
+                    className: trigger ? `${classes.active} ${classes.navLinks}` : classes.navLinks
                 }}
             >
                 { props.label}

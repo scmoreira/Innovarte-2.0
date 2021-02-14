@@ -1,19 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link as RouterLink } from "react-router-dom";
 
 import { IconButton, Badge } from '@material-ui/core';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 import useStyles from './navBar.styles';
 
 const CartIcon = () => {
  
+    const [items, setItems] = useState(1);
+    const trigger = useScrollTrigger({ threshold: 100 });
     const classes = useStyles();
-    const items = 2
+
+    useEffect(() => {
+        // revisar el context por si hay cambios
+    }, []);
 
     return (
         <IconButton
-            className= {classes.cart}
+            className= { trigger ? `${classes.cart} ${classes.active}` : classes.cart}
             aria-label='cart'
             component={RouterLink}
             to='/cart'
@@ -23,7 +29,7 @@ const CartIcon = () => {
                 className={classes.badge}
                 color='secondary'
             >
-                <ShoppingCartIcon />
+                <ShoppingCartOutlinedIcon />
             </Badge>
         </IconButton>
     );

@@ -3,12 +3,18 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles( theme => ({
     root: {
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     offset: theme.mixins.toolbar,
     toolbar: {
         display: 'flex',
         justifyContent: 'space-between',
+        backgroundColor: '#fff',
+    },
+    toolbarActive: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        backgroundColor: theme.palette.primary.main
     },
     navBrand: {
         display: 'flex',
@@ -27,7 +33,7 @@ const useStyles = makeStyles( theme => ({
         fontSize: '1.6rem',
         textTransform: 'lowercase',
         '&:hover': {
-            color: 'inherit',
+            color: theme.palette.primary.dark,
         },
         '@media (max-width: 900px)': {
             fontSize: '2rem',
@@ -36,13 +42,15 @@ const useStyles = makeStyles( theme => ({
     navLinks: {
         size: '18px',
         marginLeft: '38px',
+        fontWeight: 700,
         '&:hover': {
-            color: 'inherit',
+            color: theme.palette.primary.dark,
         }
     },
     logout: {
         size: '18px',
         marginLeft: '38px',
+        fontWeight: 700,
         '&:hover': {
             color: theme.palette.error.main,
         },
@@ -54,9 +62,9 @@ const useStyles = makeStyles( theme => ({
         }
     },
     cart: {
-        color: 'inherit',
+        color: theme.palette.primary.main,
         '&:hover': {
-            color: 'inherit',
+            color: theme.palette.primary.dark,
         }        
     },
     badge: {
@@ -73,6 +81,12 @@ const useStyles = makeStyles( theme => ({
         flexDirection: 'column',
         alignContent: 'center',
         padding: '20px 25px'
+    },
+    menuIcon: {
+        color: theme.palette.primary.main,
+    },
+    active: {
+        color: theme.palette.text.secondary
     }
 }));
 

@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const UserService = axios.create({
+const Service = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
     withCredentials: true
 });
 
-export default UserService;
+export default Service;

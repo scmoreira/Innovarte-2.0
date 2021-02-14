@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link as RouterLink } from "react-router-dom";
+import { HashLink as Link } from 'react-router-hash-link'
 
 import NavLinks from './NavLinks';
 import Logout from './Logout';
 import CartIcon from './CartIcon';
 
-import { Toolbar, IconButton, Drawer, Link, MenuItem } from '@material-ui/core';
+import { Toolbar, IconButton, Drawer, MenuItem } from '@material-ui/core';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import MenuIcon from '@material-ui/icons/Menu';
 import useStyles from './navBar.styles';
 
@@ -13,7 +14,7 @@ const MobileNav = () => {
 
     const [drawerOpen, setDrawerOpen] = useState(false);
     const classes = useStyles();
-    
+    const trigger = useScrollTrigger({ threshold: 100 });
     const getDrawerChoices = () => {
         return NavLinks.map(props => {
             return (
@@ -21,7 +22,7 @@ const MobileNav = () => {
                     {...{
                         ...props,
                         key: props.label,
-                        component: RouterLink,
+                        component: Link,
                         color: 'inherit',
                         style: { textDecoration: 'none' },
                     }}
@@ -43,7 +44,9 @@ const MobileNav = () => {
                     onClick: () => setDrawerOpen(true)
                 }}
             >
-                <MenuIcon />
+                <MenuIcon
+                    className={trigger ? classes.active : classes.menuIcon} 
+                />
             </IconButton>
             <Drawer
                 {...{
@@ -54,8 +57,8 @@ const MobileNav = () => {
             >
                 <div className= {classes.drawContainer}>
                     <div>{getDrawerChoices()}</div>
-                    <Logout />
                     <CartIcon />
+                    <Logout />
                 </div>
             </Drawer>
         </Toolbar>

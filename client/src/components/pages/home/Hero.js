@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import Carousel from 'react-bootstrap/Carousel';
 import Image from '../../shared/images/background.jpg';
 
+import './Hero.styles.css';
+
 const items = [
     {
         id: 1,
@@ -15,7 +17,6 @@ const items = [
     {
         id: 2,
         title: 'Auction of selected artworks',
-        description: 'Upcoming',
         bgImg: Image,
         alt: 'Second slide',
         button: 'Make your offer!',
@@ -25,24 +26,26 @@ const items = [
 
 const Hero = () => {
     return (
-        <Carousel fade='true'>
+        <div className='carousel'>
+            <Carousel fade={true}>
             { items.map(item => {
                 return (
-                    <Carousel.Item interval={5000} key={item.id}>
+                    <Carousel.Item interval={7000} key={item.id}>
                         <img
-                            className='d-block w-100'
+                            className='carousel-img'
                             src={item.bgImg}
                             alt={item.alt}
                         />
                         <Carousel.Caption className='text-dark'>
                             <h1>{item.title}</h1>
-                            <p>{item.description}</p>
-                            {item.button && <Link to={item.to}>{item.button}</Link>}
+                            {item.description && <p>{item.description}</p>}
+                            {item.button && <p><Link to={item.to}>{item.button}</Link></p>}
                         </Carousel.Caption>
                     </Carousel.Item>
                 );
             })}
         </Carousel>
+        </div>
     );
 }
 

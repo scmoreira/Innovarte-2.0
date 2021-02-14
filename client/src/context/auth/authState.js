@@ -3,7 +3,7 @@ import React, { useReducer } from 'react';
 import AuthContext from './authContext';
 import AuthReducer from './authReducer';
 
-import userService from '../../service/user.service';
+import Service from '../../service/service';
 
 import {
     SIGNUP_SUCCESS,
@@ -28,7 +28,7 @@ const AuthState = props => {
     const signup = async user => {
         try {
 
-            const response = await userService.post('api/signup', user);
+            const response = await Service.post('api/signup', user);
 
             dispatch({
                 type: SIGNUP_SUCCESS,
