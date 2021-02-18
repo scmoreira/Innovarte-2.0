@@ -6,8 +6,11 @@ const cors = require('cors');
 const whitelist = [process.env.DOMAIN_REMOTE, process.env.DOMAIN_LOCAL]
 const corsOptions = {
     origin: (origin, callback) => {
-        const originIsWhitelisted = whitelist.includes(origin)
-        callback(null, originIsWhitelisted)
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
     },
     credentials: true
 }
