@@ -14,7 +14,8 @@ const Artworks = require('../models/artwork.model');
 // List of artworks
 router.get('/getAllArtworks', (req, res) => {
 
-    Artworks.find()
+    Artworks
+        .find()
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 });
@@ -109,7 +110,7 @@ router.put('/artworkSold/:artwork_id', (req, res) => {
 });
 
 // Delete an artwork
-router.delete('/:artwork_id/deleteArtwork',, (req, res) => {
+router.delete('/:artwork_id/deleteArtwork', (req, res) => {
 
     const artwork = req.params.artwork_id;
 
