@@ -2,21 +2,18 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-const bcrypt = require("bcrypt");
-const bcryptSalt = 10;
-
 const uploader = require('../configs/cloudinary.config');
 
 const User = require('./../models/user.model');
 const Artworks = require('./../models/artwork.model');
 
-const checkLoggedIn = (req, res, next) => req.isAuthenticated() ? next() : console.log('No authorized!');
+//const checkLoggedIn = (req, res, next) => req.isAuthenticated() ? next() : console.log('No authorized!');
 
 
 // Endpoints
 
 // Update profile
-router.put('/editProfile/:user_id', uploader.single('avatar'), checkLoggedIn, (req, res) => {
+router.put('/editProfile/:user_id', uploader.single('avatar'), (req, res) => {
 
     const user = req.params.user_id;
     const { username, email, password, role } = req.body;
@@ -34,7 +31,7 @@ router.put('/editProfile/:user_id', uploader.single('avatar'), checkLoggedIn, (r
 });
 
 // Get all user artworks 
-router.get('/allUserArtworks/:user_id', checkLoggedIn, (req, res) => {
+router.get('/allUserArtworks/:user_id', (req, res) => {
 
     const user = req.params.user_id;
 
@@ -50,7 +47,7 @@ router.get('/allUserArtworks/:user_id', checkLoggedIn, (req, res) => {
 });
 
 // Update buyed artworks
-router.put('/updateBuyedArtworks/:user_id/:artwork_id', checkLoggedIn, (req, res) => {
+router.put('/updateBuyedArtworks/:user_id/:artwork_id', (req, res) => {
 
     const user = req.params.user_id;
     const artwork = req.params.artwork_id;
@@ -68,7 +65,7 @@ router.put('/updateBuyedArtworks/:user_id/:artwork_id', checkLoggedIn, (req, res
 });
 
 // Get available artworks to sell (only artists)
-router.get('/onSellArtworks/:user_id', checkLoggedIn, (req, res) => {
+router.get('/onSellArtworks/:user_id', (req, res) => {
 
     const user = req.params.user_id;
 
@@ -84,7 +81,7 @@ router.get('/onSellArtworks/:user_id', checkLoggedIn, (req, res) => {
 });
 
 // Get sold artworks (only artists)
-router.get('/soldArtworks/:user_id', checkLoggedIn, (req, res) => {
+router.get('/soldArtworks/:user_id', (req, res) => {
 
     const user = req.params.user_id;
 
@@ -100,7 +97,7 @@ router.get('/soldArtworks/:user_id', checkLoggedIn, (req, res) => {
 });
 
 // Get user cart info
-router.get('/cart/:user_id', checkLoggedIn, (req, res) => {
+router.get('/cart/:user_id', (req, res) => {
 
     const user = req.params.user_id;
 
@@ -116,7 +113,7 @@ router.get('/cart/:user_id', checkLoggedIn, (req, res) => {
 });
 
 // Add item to user cart
-router.put('/addToCart/:user_id/:artwork_id', checkLoggedIn, (req, res) => {
+router.put('/addToCart/:user_id/:artwork_id', (req, res) => {
 
     const user = req.params.user_id;
     const userCart = req.user.cart;
@@ -140,7 +137,7 @@ router.put('/addToCart/:user_id/:artwork_id', checkLoggedIn, (req, res) => {
 });
 
 // Delete item to user cart
-router.put('/deleteFromCart/:user_id/:artwork_id', checkLoggedIn, (req, res) => {
+router.put('/deleteFromCart/:user_id/:artwork_id', (req, res) => {
 
     const user = req.params.user_id;
     const userCart = req.user.cart;

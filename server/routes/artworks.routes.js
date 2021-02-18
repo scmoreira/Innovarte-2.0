@@ -6,8 +6,8 @@ const uploader = require('../configs/cloudinary.config');
 
 const Artworks = require('../models/artwork.model');
 
-const checkLoggedIn = (req, res, next) => req.isAuthenticated() ? next() : console.log('No authorized!');
-const checkRole = rolesToCheck => (req, res, next) => req.isAuthenticated() && rolesToCheck.includes(req.user.role) ? next() : console.log('No authorized!');
+//const checkLoggedIn = (req, res, next) => req.isAuthenticated() ? next() : console.log('No authorized!');
+//const checkRole = rolesToCheck => (req, res, next) => req.isAuthenticated() && rolesToCheck.includes(req.user.role) ? next() : console.log('No authorized!');
 
 // Endpoints
 
@@ -61,7 +61,7 @@ router.get('/getAvailableArtworks', (req, res) => {
 });
 
 // Add an artwork
-router.post('/newArtwork', uploader.single('image'), checkLoggedIn, checkRole('artist'), (req, res) => {
+router.post('/newArtwork', uploader.single('image'), (req, res) => {
 
     const { title, description, price, currency, size, materials, artist, owner, tags } = req.body;
     // const imageFile = req.file.url;
@@ -74,7 +74,7 @@ router.post('/newArtwork', uploader.single('image'), checkLoggedIn, checkRole('a
 });
 
 // Update an artwork
-router.put('/editArtwork/:artwork_id', uploader.single('image'), checkLoggedIn, checkRole('artist'), (req, res) => {
+router.put('/editArtwork/:artwork_id', uploader.single('image'), (req, res) => {
 
     const artwork = req.params.artwork_id;
     const { title, description, price, currency, size, materials, artist, owner, tags } = req.body;
@@ -86,7 +86,8 @@ router.put('/editArtwork/:artwork_id', uploader.single('image'), checkLoggedIn, 
         return;
     }
 
-    Artworks.findByIdAndUpdate(artwork, { title, description, price, currency, size, materials, artist, owner, tags, image: img }, { new: true })
+    Artworks
+        .findByIdAndUpdate(artwork, { title, description, price, currency, size, materials, artist, owner, tags, image: img }, { new: true })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 });
@@ -108,7 +109,7 @@ router.put('/artworkSold/:artwork_id', (req, res) => {
 });
 
 // Delete an artwork
-router.delete('/:artwork_id/deleteArtwork', checkLoggedIn, checkRole('artist'), (req, res) => {
+router.delete('/:artwork_id/deleteArtwork',, (req, res) => {
 
     const artwork = req.params.artwork_id;
 
