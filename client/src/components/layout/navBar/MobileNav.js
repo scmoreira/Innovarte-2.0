@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { HashLink as Link } from 'react-router-hash-link'
+import { HashLink as Link } from 'react-router-hash-link';
 
 import NavLinks from './NavLinks';
 import Logout from './Logout';
 import CartIcon from './CartIcon';
 
 import { Toolbar, IconButton, Drawer, MenuItem } from '@material-ui/core';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import MenuIcon from '@material-ui/icons/Menu';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import useStyles from './navBar.styles';
 
 const MobileNav = () => {
@@ -22,7 +22,6 @@ const MobileNav = () => {
                     {...{
                         ...props,
                         key: props.label,
-                        component: Link,
                         color: 'inherit',
                         style: { textDecoration: 'none' },
                     }}

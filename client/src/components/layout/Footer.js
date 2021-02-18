@@ -8,19 +8,22 @@ const useStyle = makeStyles(theme => ({
         bottom: 0,
         left: 0,
         width: '100%',
-        height: '40px',
+        height: '30px',
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.text.secondary,
         fontFamily: "'Allura', cursive",
-        fontSize: '1.2em',
-        fontWeight: 700,
+        fontSize: '1.1em',
+        fontWeight: 500,
         letterSpacing: '3px'
     },
     container: {
         textAlign: 'center',
     },
     footerText: {
-        margin: '10px auto'
+        margin: '3px auto',
+        '@media (max-width: 900px)': {
+            margin: '7px'
+        }
     }
 }));
 

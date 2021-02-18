@@ -3,36 +3,64 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
+import AddShoppingCartOutlinedIcon from '@material-ui/icons/AddShoppingCartOutlined';
+import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
+    textButton: {
+        height: '35px',
+        marginTop: '3%',
+        '@media (max-width: 650px )': {
+            marginTop: '3%'
+        }
     }
-  },
 }));
 
-const DeleteButton = (color) => {
+const DeleteButton = () => {
     return (
-        <IconButton color={color} aria-label="delete">
-            <DeleteIcon />
+        <IconButton aria-label='delete'>
+            <DeleteForeverOutlinedIcon color='error' fontSize='large' />
         </IconButton>
     );
 }
 
-const TextButton = (text, ...props) => {
-    
-    const classes = useStyles();
-
+const AddToCartButton = () => {
     return (
-        <div className={classes.root}>
-            <Button {...props}>
-                {text}
-            </Button>
-        </div>
+        <IconButton aria-label='add to shopping cart'>
+            <AddShoppingCartOutlinedIcon color='primary' fontSize='large'/>
+        </IconButton> 
     );
 }
 
-export { DeleteButton };
-export default TextButton;
+const GoBackButton = props => {
+    const classes = useStyles();
+    return (
+        <Button
+            variant='contained'
+            color='primary'
+            startIcon={<ReplyOutlinedIcon />}
+            className={classes.textButton}
+            onClick={() => props.history.goBack()}
+        >
+           Go Back
+        </Button>
+    );
+}
+
+const EditButton = () => {
+    const classes = useStyles();
+    return (
+        <Button
+            variant='contained'
+            color='primary'
+            startIcon={<EditOutlinedIcon />}
+            className={classes.textButton}
+        >
+           Edit
+        </Button>
+    );
+}
+
+export { DeleteButton, AddToCartButton, GoBackButton, EditButton };

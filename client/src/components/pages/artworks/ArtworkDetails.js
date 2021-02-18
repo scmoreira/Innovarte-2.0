@@ -1,31 +1,48 @@
 import React from 'react';
 
-const ArtworkDetails = () => {
+import { DeleteButton, AddToCartButton, EditButton } from '../../shared/Button';
+import { Modal } from '@material-ui/core';
+import useStyles from './artworks.styles';
+
+const ArtworkDetails = props => {
+
+    const classes = useStyles();
+
     return (
-        <section>
-            <div className='container-fluid'>
-                <div className='row'>
-                    <div className='col-md-12 col-lg-6'>
-                        <img />
-                    </div>
-                    <div className='col-md-12 col-lg-6'>
-                        <div>
-                            <h5>Title</h5>
-                            <p>de <span>Artist</span></p>
-                            <p>Description</p>
-                            <p><small className='text-muted'>Materials: |
-                            Size: </small></p>
-                            <p>Price: </p>
-                            <div className='container-fluid'>
-                                <div className='row'>
-                                    <button className='btn btn-dark'>Back</button>
+        <Modal
+            open={props.open}
+            onClose={props.onClose}
+        >
+            <div className={classes.detailsContainer}>
+                    <div className={'container-fluid'}>
+                        <div className='row'>
+                            <div className='col-md-12 col-lg-6'>
+                            <img
+                                src={props.artwork.image}
+                                alt={props.artwork.title}
+                                className={classes.detailsImg} />
+                            </div>
+                            <div className={`col-md-12 col-lg-6 ${classes.detailsContent}`}>
+                                <div>
+                                    <h1>{props.artwork.title}</h1>
+                                    <p>by <i>{props.artwork.artist}</i></p>
+                                    <p>{props.artwork.description}</p>
+                                    <p><span className='text-muted'>Materials: {props.artwork.materials} |
+                                        Size: {props.artwork.size}</span></p>
+                                    <p>Price: {props.artwork.price} {props.artwork.currency}</p>
+                                    <div className='container-fluid'>
+                                        <div className={`row ${classes.btnContainer}`}>
+                                            <AddToCartButton />
+                                            <DeleteButton />
+                                            <EditButton />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
-        </section>
+        </Modal>
     );
 }
 

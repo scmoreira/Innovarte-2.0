@@ -6,13 +6,7 @@ import AlertContext from '../../../context/alert/alertContext';
 import ArtworkCard from './ArtworkCard';
 
 import { Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles({
-    root: {
-        margin: '2% auto'
-    }
-});
+import useStyles from './artworks.styles';
 
 const ArtworksList = () => {
 
@@ -20,24 +14,25 @@ const ArtworksList = () => {
     const alertContext = useContext(AlertContext);
     const classes = useStyles();
 
-    const { artworks, message, getAllArtworks } = artworkContext;
+    const { artworksOnSell, message, getArtworksOnSell } = artworkContext;
     const { alert, showAlert } = alertContext;
 
     useEffect(() => {
         if (message) {
             showAlert(message.message, message.category);
         }
-        getAllArtworks();
+        getArtworksOnSell();
+        // eslint-disable-next-line
     }, [message]);
 
     return (
-        <div className={classes.root}>
+        <div className={classes.artworksListRoot}>
             { alert && <div className={`alert ${alert.category}`}>{ alert.message}</div> }
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={12}>
                     <Grid container justify='space-around'>
-                        {artworks.map(artwork => (
-                        <ArtworkCard key={artwork._id} artwork={artwork} />
+                        {artworksOnSell.map(artwork => (
+                            <ArtworkCard key={artwork._id} artwork={artwork} />
                         ))}
                     </Grid>
                 </Grid>
