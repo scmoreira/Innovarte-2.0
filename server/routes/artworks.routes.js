@@ -35,10 +35,10 @@ router.get('/getOneArtwork/:artwork_id', (req, res) => {
 });
 
 // Find the artworks of an artist
-router.get('/getArtistArtworks/:artist', (req, res) => {
+router.get('/getArtworksByArtist/:artist', (req, res) => {
 
     Artworks
-        .find({ artist: req.params.artist })
+        .find({ artist: req.params.artist, available: true })
         .then(works => { res.json(works) })
         .catch(err => res.status(500).json(err))
 });
