@@ -1,38 +1,79 @@
 import React, { useContext, useEffect } from 'react';
 
 import ArtworkContext from '../../../context/artworks/artworkContext';
-import AlertContext from '../../../context/alert/alertContext';
 
 import ArtworkCard from './ArtworkCard';
 
-import { Grid } from '@material-ui/core';
+import { FormControl, Grid, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 import useStyles from './artworks.styles';
 
 const ArtworksList = () => {
 
     const artworkContext = useContext(ArtworkContext);
-    const alertContext = useContext(AlertContext);
+    const { artworks, getArtworksOnSell, getArtworksByTag, getArtworksByArtist } = artworkContext;
+    
+    const tags = ['All','Painting', 'Sculpture', 'Drawing', 'Crafts', 'Photography', 'Other'].sort();
+    
     const classes = useStyles();
 
-    const { artworksOnSell, message, getArtworksOnSell } = artworkContext;
-    const { alert, showAlert } = alertContext;
-
     useEffect(() => {
-        if (message) {
-            showAlert(message.message, message.category);
-        }
         getArtworksOnSell();
         // eslint-disable-next-line
-    }, [message]);
+    }, []);
+
+    const handleArtistFilter = event => {
+        let artist = event.target.value;
+
+        if (artist === '') {
+            getArtworksOnSell();
+        }
+        getArtworksByArtist(artist);
+    }
+
+    const handleTagFilter = event => {
+        let tag = event.target.value
+        
+        if (tag === 'All') {
+            getArtworksOnSell();
+        } else {
+            getArtworksByTag(tag);
+        }
+    }
+artworks.map(art => console.log(art))
 
     return (
         <div className={classes.artworksListRoot}>
-            { alert && <div className={`alert ${alert.category}`}>{ alert.message}</div> }
+            <div className={classes.formContainer}>
+                <FormControl className={classes.formControl} >
+                    <TextField
+                        variant='filled'
+                        label='Artist'
+                        name= 'artist'
+                        onChange={handleArtistFilter} />
+                </FormControl>
+                <FormControl className={classes.formControl} variant='filled'>
+                    <InputLabel id='select-tag'>Filter by</InputLabel>
+                    <Select
+                        labelId='select-tag'
+                        onChange={handleTagFilter}
+                    >
+                        {tags.map((tag, index) => (
+                            <MenuItem
+                                key={index}
+                                name='tags'
+                                value={tag}
+                            >
+                                {tag}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+            </div>
             <Grid container spacing={2}>
-                <Grid item xs={12} sm={12}>
+                <Grid item sm={12}>
                     <Grid container justify='space-around'>
-                        {artworksOnSell.map(artwork => (
-                            <ArtworkCard key={artwork._id} artwork={artwork} />
+                        { artworks.map(artwork => (
+                            <ArtworkCard key={artwork._id} {...artwork} />
                         ))}
                     </Grid>
                 </Grid>

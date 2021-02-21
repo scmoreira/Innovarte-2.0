@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
+import { Tooltip, Button, IconButton } from '@material-ui/core';
 import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 import AddShoppingCartOutlinedIcon from '@material-ui/icons/AddShoppingCartOutlined';
 import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
@@ -20,17 +19,23 @@ const useStyles = makeStyles((theme) => ({
 
 const DeleteButton = () => {
     return (
-        <IconButton aria-label='delete'>
-            <DeleteForeverOutlinedIcon color='error' fontSize='large' />
-        </IconButton>
+        <Tooltip title='Delete' arrow>
+            <IconButton aria-label='delete'>
+                <DeleteForeverOutlinedIcon color='error' fontSize='large' />
+            </IconButton>
+        </Tooltip>
+        
     );
 }
 
 const AddToCartButton = () => {
     return (
-        <IconButton aria-label='add to shopping cart'>
-            <AddShoppingCartOutlinedIcon color='primary' fontSize='large'/>
-        </IconButton> 
+        <Tooltip title='Add' arrow>
+            <IconButton aria-label='add to shopping cart'>
+                <AddShoppingCartOutlinedIcon color='primary' fontSize='large'/>
+            </IconButton> 
+        </Tooltip>
+        
     );
 }
 

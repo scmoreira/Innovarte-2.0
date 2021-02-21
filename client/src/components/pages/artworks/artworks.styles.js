@@ -3,19 +3,33 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
     // Atworks List
     artworksListRoot: {
-        margin: '2% auto',
+        margin: '1% auto',
         backgroundColor: theme.palette.background.paper,
-        backgroundImage: 'url("https://www.transparenttextures.com/patterns/brick-wall.png")',
+        backgroundImage: 'url("https://www.transparenttextures.com/patterns/brick-wall.png")'
+    },
+    // Form 
+    formContainer: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        flexWrap: 'wrap'
+    },
+    formControl: {
+        margin: theme.spacing(3),
+        minWidth: 130,
+        '& label': {
+            color: theme.palette.text.primary
+        }
     },
     // Artwork card
     cardRoot: {
         maxWidth: 400,
         height: 'auto',
-        margin: '2%',
-        textAlign: 'center',
+        margin: '2% 0',
+        textAlign: 'center'
     },
     cardContent: {
-        paddingBottom: 0
+        paddingBottom: 0,
+        color: theme.palette.text.terciary
     },
     cardMedia: {
         maxWidth: '100%',
@@ -29,7 +43,8 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'center',
         paddingTop: 0,
         '& button': {
-            size: 'small'
+            size: 'small',
+            color: theme.palette.text.terciary
         }
     },
     // Artwork details

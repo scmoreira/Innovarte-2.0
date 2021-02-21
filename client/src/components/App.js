@@ -2,9 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import AuthState from '../context/auth/authState';
-import UserState from '../context/user/userState';
+//import UserState from '../context/user/userState';
 import ArtworkState from '../context/artworks/artworkState';
-import AlertState from '../context/alert/alertState';
 
 import Navbar from './layout/navBar';
 import Home from './pages/home';
@@ -25,7 +24,6 @@ function App() {
       <AuthState>
         {/* <UserState> */}
           <ArtworkState>
-            <AlertState>
               <Router>
                 <Navbar />
                 <Switch>
@@ -39,7 +37,6 @@ function App() {
                 </Switch>
                 <Footer />
               </Router>
-            </AlertState>
           </ArtworkState>
         {/* </UserState> */}
       </AuthState>

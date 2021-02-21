@@ -6,88 +6,58 @@ import ArtworkContext from './artworkContext';
 import ArtworkReducer from './artworkReducer';
 
 import {
-    GET_ALL_ARTWORKS,
     GET_AVAILABLE_ARTWORKS,
-    GET_ONE_ARTWORK,
-    GET_ARTIST_ARTWORKS,
+    //GET_ONE_ARTWORK,
+    GET_ARTWORKS_BY_ARTIST,
     GET_ARTWORKS_BY_TAG,
-    SET_SOLD_ARTWORK,
-    ADD_ARTWORK,
-    EDIT_ARTWORK,
-    DELETE_ARTWORK,
-    ARTWORK_ERROR
+    // SET_SOLD_ARTWORK,
+    // ADD_ARTWORK,
+    // EDIT_ARTWORK,
+    // DELETE_ARTWORK,
 } from '../../types';
 
 const ArtworkState = props => {
 
     const initialState = {
         artworks: [],
-        artworksOnSell: [],
         artwork: null,
-        message: null
     }
 
     const [state, dispatch] = useReducer(ArtworkReducer, initialState);
 
-    const getAllArtworks = async () => {
-        try {
-            const response = await Service.get('/api/getAllArtworks');
-            dispatch({ type: GET_ALL_ARTWORKS, payload: response.data });
-        } catch (error) {
-            const alert = {
-                message: 'An error has ocurred',
-                category: 'alert-error'
-            };
-            dispatch({
-                type: ARTWORK_ERROR,
-                payload: alert
-            });
-        }
-    }
-
     const getArtworksOnSell = async () => {
         try {
-            const response = await Service.get('/api/getAvailableArtworks');
+            const response = await Service.get('/getAvailableArtworks');
             dispatch({ type: GET_AVAILABLE_ARTWORKS, payload: response.data });
         } catch (error) {
-            const alert = {
-                message: 'An error has ocurred',
-                category: 'alert-error'
-            };
-            dispatch({
-                type: ARTWORK_ERROR,
-                payload: alert
-            });
         }
     }
 
-    const getOneArtwork = async artworkId => {
+    const getArtworksByArtist = async artist => {
         try {
-            const response = await Service.get(`/api/getOneArtwork/${artworkId}`);
-            dispatch({ type: GET_ONE_ARTWORK, payload: response.data });
+            const response = await Service.get(`/getArtistArtworks/${artist}`);
+            dispatch({ type: GET_ARTWORKS_BY_ARTIST, payload: response.data });
         } catch (error) {
-            const alert = {
-                message: 'An error has ocurred. Please try again.',
-                category: 'alert-error'
-            };
-            dispatch({
-                type: ARTWORK_ERROR,
-                payload: alert
-            });
+            
         }
     }
-
+    const getArtworksByTag = async tag => {
+        try {
+            const response = await Service.get(`/getArtworksByTag/${tag}`);
+            dispatch({ type: GET_ARTWORKS_BY_TAG, payload: response.data });
+        } catch (error) {
+            
+        }
+    }
 
     return (
         <ArtworkContext.Provider
             value={{
                 artworks: state.artworks,
-                artworksOnSell: state.artworksOnSell,
                 artwork: state.artwork,
-                message: state.message,
-                getAllArtworks,
                 getArtworksOnSell,
-                getOneArtwork
+                getArtworksByArtist,
+                getArtworksByTag,
             }}
         >
             {props.children}

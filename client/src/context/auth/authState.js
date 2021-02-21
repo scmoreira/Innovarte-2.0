@@ -8,10 +8,10 @@ import Service from '../../service/service';
 import {
     SIGNUP_SUCCESS,
     SIGNUP_ERROR,
-    LOGIN_SUCCESS,
-    LOGIN_ERROR,
-    LOGOUT,
-    GET_USER
+    // LOGIN_SUCCESS,
+    // LOGIN_ERROR,
+    // LOGOUT,
+    // GET_USER
 } from '../../types';
 
 const AuthState = props => {
