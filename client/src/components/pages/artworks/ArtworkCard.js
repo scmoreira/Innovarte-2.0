@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
+import { Capitalize } from '../../shared/helpers';
 import ArtworkDetails from './ArtworkDetails';  
+
 import { Card, CardActionArea, CardMedia, CardContent, CardActions, Typography, Button } from '@material-ui/core';
 import useStyles from './artworks.styles';
 
@@ -11,25 +13,27 @@ const ArtworkCard = artwork => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
+    
+    const { title, image, artist, currency, price, } = artwork;
+    
     return (
         <>
         <Card className={classes.cardRoot} >
             <CardActionArea>
                 <CardMedia
                     className={classes.cardMedia}
-                    image= {artwork.image}
-                    title={artwork.title}
+                    image= {image}
+                    title={title}
                 />
                 <CardContent className={classes.cardContent}>
                 <Typography variant='h5' component='h2'>
-                    {artwork.title}
+                    {title}
                 </Typography>
                 <Typography variant='body2' component='p'>
-                    by <i>{artwork.artist}</i>
+                    by <i>{Capitalize(artist)}</i>
                 </Typography>
                 <Typography variant='body2' component='p'>
-                    {artwork.price} {artwork.currency}
+                    {price} {currency}
                 </Typography>
                 </CardContent>
             </CardActionArea>

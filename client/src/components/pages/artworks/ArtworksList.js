@@ -1,66 +1,81 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import ArtworkContext from '../../../context/artworks/artworkContext';
 
 import ArtworkCard from './ArtworkCard';
 
 import { FormControl, Grid, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import useStyles from './artworks.styles';
 
 const ArtworksList = () => {
 
     const artworkContext = useContext(ArtworkContext);
-    const { artworks, getArtworksOnSell, getArtworksByTag, getArtworksByArtist } = artworkContext;
-    
-    const tags = ['All','Painting', 'Sculpture', 'Drawing', 'Crafts', 'Photography', 'Other'].sort();
+    const { artworks, artists, getArtworksOnSell, getArtworksByTag, getArtworksByArtist, getArtists } = artworkContext;
+  
+    const artistOptions = { options: artists.map((option) => option.artist) }
+    const tags = ['All','Painting', 'Sculpture', 'Drawing', 'Crafts', 'Photography', 'Other'];
     
     const classes = useStyles();
 
     useEffect(() => {
         getArtworksOnSell();
+        getArtists();
         // eslint-disable-next-line
     }, []);
 
-    const handleArtistFilter = event => {
-        let artist = event.target.value;
+    const handleArtistFilter = (event, artist) => {
+        
+        event.preventDefault();
 
-        if (artist === '') {
+        if (artist === null) {
             getArtworksOnSell();
         }
         getArtworksByArtist(artist);
     }
 
     const handleTagFilter = event => {
-        let tag = event.target.value
-        
+        let tag = event.target.value;
+
         if (tag === 'All') {
             getArtworksOnSell();
         } else {
             getArtworksByTag(tag);
         }
     }
-artworks.map(art => console.log(art))
 
     return (
         <div className={classes.artworksListRoot}>
             <div className={classes.formContainer}>
-                <FormControl className={classes.formControl} >
-                    <TextField
-                        variant='filled'
-                        label='Artist'
-                        name= 'artist'
-                        onChange={handleArtistFilter} />
-                </FormControl>
-                <FormControl className={classes.formControl} variant='filled'>
+                <Autocomplete
+                    {...artistOptions}
+                    className={classes.formControl}
+                    name='artist'
+                    onChange={(event, artist) => {
+                        handleArtistFilter(event, artist);
+                    }} 
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            label='Artist'
+                            variant='filled'
+                        />
+                    )}
+                />
+                <FormControl
+                    className={classes.formControl}
+                    variant='filled'
+                >
                     <InputLabel id='select-tag'>Filter by</InputLabel>
                     <Select
                         labelId='select-tag'
+                        name='tags'
+                        value= ''
                         onChange={handleTagFilter}
                     >
-                        {tags.map((tag, index) => (
+                        {tags.sort().map((tag, index) => (
                             <MenuItem
                                 key={index}
-                                name='tags'
                                 value={tag}
                             >
                                 {tag}

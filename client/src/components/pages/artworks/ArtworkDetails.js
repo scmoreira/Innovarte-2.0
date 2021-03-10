@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Capitalize } from '../../shared/helpers';
 import { AddToCartButton } from '../../shared/Button';
 import { Modal } from '@material-ui/core';
 
@@ -7,8 +8,10 @@ import useStyles from './artworks.styles';
 
 const ArtworkDetails = props => {
 
-    const { open, onClose, artwork } = props;
     const classes = useStyles();
+
+    const { open, onClose, artwork } = props;
+    const { title, image, artist, price, currency, description, size, materials } = artwork;
 
     return (
         <Modal
@@ -19,19 +22,18 @@ const ArtworkDetails = props => {
                 <div className={'container-fluid'}>
                     <div className='row'>
                         <div className='col-md-12 col-lg-6'>
-                        <img
-                            src={artwork.image}
-                            alt={artwork.title}
-                            className={classes.detailsImg} />
+                            <img
+                                src={image}
+                                alt={title}
+                                className={classes.detailsImg} />
                         </div>
                         <div className={`col-md-12 col-lg-6 ${classes.detailsContent}`}>
                             <div>
-                                <h1>{artwork.title}</h1>
-                                <p>by <i>{artwork.artist}</i></p>
-                                <p>{artwork.description}</p>
-                                <p><span className='text-muted'>Materials: {artwork.materials} |
-                                    Size: {artwork.size}</span></p>
-                                <p>Price: {artwork.price} {artwork.currency}</p>
+                                <h1>{title}</h1>
+                                <p>by <i>{ Capitalize(artist)}</i></p>
+                                <p>{description}</p>
+                                <p><span className='text-muted'>Materials: {materials} |Size: {size}</span></p>
+                                <p>Price: {price} {currency}</p>
                                 <div className='container-fluid'>
                                     <div className={`row ${classes.btnContainer}`}>
                                         <AddToCartButton />
