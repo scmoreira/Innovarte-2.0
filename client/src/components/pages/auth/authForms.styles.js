@@ -2,14 +2,14 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      height: '100vh',
+    height: '100vh'
     },
     paper: {
-      margin: theme.spacing(10, 12),
+      margin: '80px auto',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      maxWidth: '75%'
+      maxWidth: '50%'
     },
     avatar: {
       margin: theme.spacing(1),
@@ -18,7 +18,13 @@ const useStyles = makeStyles((theme) => ({
     },
     form: {
       width: '100%',
-      marginTop: theme.spacing(3)
+      marginTop: theme.spacing(3),
+      '& label': {
+        color: theme.palette.text.primary
+      }
+    },
+    radio: {
+      color: theme.palette.primary.main
     },
     submit: {
       margin: theme.spacing(3, 0, 2)

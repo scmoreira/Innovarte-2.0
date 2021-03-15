@@ -30,12 +30,11 @@ const Login = () => {
               margin='normal'
               required
               fullWidth
-              id='username'
               label='Username'
               name='username'
               autoComplete='username'
             />
-            <TextField
+          <TextField
               variant='outlined'
               margin='normal'
               required
@@ -43,8 +42,6 @@ const Login = () => {
               name='password'
               label='Password'
               type='password'
-              id='password'
-              autoComplete='current-password'
             />
             {/* <FormControlLabel
               control={<Checkbox value='remember' color='primary' />}

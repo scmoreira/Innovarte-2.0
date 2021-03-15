@@ -2,13 +2,13 @@ import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-//import FormControlLabel from '@material-ui/core/FormControlLabel';
-//import Checkbox from '@material-ui/core/Checkbox';
-//import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import AssignmentIndOutlinedIcon from '@material-ui/icons/AssignmentIndOutlined';
 import Typography from '@material-ui/core/Typography';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import useStyles from './authForms.styles';
 
@@ -25,48 +25,53 @@ const Signup = () => {
         <Typography component='h1' variant='h5'>
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form}>
           <Grid container spacing={2}>
             <Grid item sm={12}>
               <TextField
-                autoComplete='username'
-                name='username'
                 variant='outlined'
-                required
                 fullWidth
-                id='username'
+                required
+                name='username'
                 label='Username'
+                autoComplete='username'
                 
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 variant='outlined'
-                required
                 fullWidth
-                id='email'
-                label='Email Address'
+                required
                 name='email'
+                label='Email Address'
                 autoComplete='email'
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 variant='outlined'
-                required
                 fullWidth
+                required
                 name='password'
                 label='Password'
                 type='password'
-                id='password'
               />
             </Grid>
-            {/* <Grid item xs={12}>
+            <RadioGroup row aria-label='role' name='role'>
               <FormControlLabel
-                control={<Checkbox value='allowExtraEmails' color='primary' />}
-                label='I want to receive inspiration, marketing promotions and updates via email.'
+                value='user'
+                label='User'
+                labelPlacement='Start'
+                control={<Radio className={classes.radio} />}
               />
-            </Grid> */}
+              <FormControlLabel
+                value='artist'
+                label='Artist'
+                labelPlacement='Start'
+                control={<Radio className={classes.radio} />}
+              />
+            </RadioGroup>
           </Grid>
           <Button
             type='submit'
