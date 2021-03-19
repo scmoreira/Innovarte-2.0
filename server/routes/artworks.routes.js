@@ -6,46 +6,49 @@ const uploader = require('../configs/cloudinary.config');
 
 const Artworks = require('../models/artwork.model');
 
-//const checkLoggedIn = (req, res, next) => req.isAuthenticated() ? next() : console.log('No authorized!');
-//const checkRole = rolesToCheck => (req, res, next) => req.isAuthenticated() && rolesToCheck.includes(req.user.role) ? next() : console.log('No authorized!');
-
 // Endpoints
 
 // List of artworks
-router.get('/getAllArtworks', (req, res) => {
+// router.get('/getAllArtworks', (req, res) => {
 
-    Artworks
-        .find()
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-});
+//     Artworks
+//         .find()
+//         .then(response => res.json(response))
+//         .catch(err => res.status(500).json(err))
+// });
 
 // Find one artwork
-router.get('/getOneArtwork/:artwork_id', (req, res) => {
+// router.get('/getOneArtwork/:artwork_id', (req, res) => {
 
-    if (!mongoose.Types.ObjectId.isValid(req.params.artwork_id)) {
-        res.status(400).json({ message: 'Specified id is not valid' });
-        return;
-    }
+//     if (!mongoose.Types.ObjectId.isValid(req.params.artwork_id)) {
+//         res.status(400).json({ message: 'Specified id is not valid' });
+//         return;
+//     }
 
-    Artworks
-        .findById(req.params.artwork_id)
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-});
+//     Artworks
+//         .findById(req.params.artwork_id)
+//         .then(response => res.json(response))
+//         .catch(err => res.status(500).json(err))
+// });
 
 // Find the artworks of an artist
 router.get('/getArtworksByArtist/:artist', (req, res) => {
-
     Artworks
         .find({ artist: req.params.artist, available: true })
         .then(works => { res.json(works) })
         .catch(err => res.status(500).json(err))
 });
 
+// Get list of artists
+router.get('/getArtists', (req, res) => {
+    Artworks
+        .find({}, { artist: 1, _id: 0 })
+        .then(artists => { res.json(artists) })
+        .catch(err => res.status(500).json(err))
+});
+
 // Find artworks by tag
 router.get('/getArtworksByTag/:tag', (req, res) => {
-
     Artworks
         .find({ tags: req.params.tag, available: true })
         .then(works => { res.json(works) })
@@ -54,7 +57,6 @@ router.get('/getArtworksByTag/:tag', (req, res) => {
 
 // Find available artworks
 router.get('/getAvailableArtworks', (req, res) => {
-
     Artworks
         .find({ available: true })
         .then(works => { res.json(works) })

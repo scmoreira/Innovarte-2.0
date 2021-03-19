@@ -10,12 +10,12 @@ router.post('/signup', (req, res) => {
     const { username, password, avatar, email, role } = req.body;
     
     if (!username || !password || !email) {
-        res.status(400).json({ message: 'Fill all the fields with *' });
+        res.status(400).json({ message: 'All fields required' });
         return;
     }
 
     if (password.length < 5) {
-        res.status(400).json({ message: 'Password not valid' });
+        res.status(400).json({ message: 'Password must be at least 5 characters' });
         return;
     }
 

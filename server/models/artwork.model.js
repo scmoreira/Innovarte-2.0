@@ -38,7 +38,8 @@ const artworkSchema = new Schema({
     },
     artist: {
         type: String,
-        required: true
+        required: true,
+        lowercase: true
     },
     owner: {
         type: String,
