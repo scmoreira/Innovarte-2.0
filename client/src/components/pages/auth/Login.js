@@ -1,10 +1,12 @@
 import React from 'react';
+
+import { SubmitButton } from '../../shared/Button';
+
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-//import FormControlLabel from '@material-ui/core/FormControlLabel';
-//import Checkbox from '@material-ui/core/Checkbox';
-//import Link from '@material-ui/core/Link';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import LockOpenOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
@@ -24,7 +26,7 @@ const Login = () => {
           <Typography component='h1' variant='h5'>
             Log in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form}>
             <TextField
               variant='outlined'
               margin='normal'
@@ -43,26 +45,23 @@ const Login = () => {
               label='Password'
               type='password'
             />
-            {/* <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
+            <FormControlLabel
+            control={
+              <Checkbox
+                value='remember'
+                className={classes.checkbox}
+              />
+            }
               label='Remember me'
-            /> */}
-            <Button
-              type='submit'
-              fullWidth
-              variant='contained'
-              color='primary'
-              className={classes.submit}
-            >
-              Log In
-            </Button>
-            {/* <Grid container>
+            />
+            <SubmitButton text='Log in'/>
+            <Grid container>
               <Grid item xs>
                 <Link href='#' variant='body2'>
                   Forgot password?
                 </Link>
               </Grid>
-            </Grid> */}
+            </Grid>
           </form>
         </div>
       </Grid>

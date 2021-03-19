@@ -8,10 +8,10 @@ import Service from '../../service/service';
 import {
     SIGNUP_SUCCESS,
     SIGNUP_ERROR,
-    // LOGIN_SUCCESS,
-    // LOGIN_ERROR,
-    // LOGOUT,
-    // GET_USER
+    LOGIN_SUCCESS,
+    LOGIN_ERROR,
+    LOGOUT,
+    GET_USER
 } from '../../types';
 
 const AuthState = props => {
@@ -27,21 +27,16 @@ const AuthState = props => {
 
     const signup = async user => {
         try {
-
-            const response = await Service.post('api/signup', user);
-
+            const response = await Service.post('/signup', user);
             dispatch({
                 type: SIGNUP_SUCCESS,
                 payload: response.data
             });
-
+            authenticateUser();
         } catch (error) {
-            
             const alert = {
-                message: error.respose.data.message,
-                category: 'alert-error'
-            }
-
+                message: error.response.data.message,
+            };
             dispatch({
                 type: SIGNUP_ERROR,
                 payload: alert
@@ -49,7 +44,46 @@ const AuthState = props => {
         }
     }
 
-    
+    const login = async user => {
+        try {
+            const response = await Service.post('/login', user);
+            dispatch({
+                type: LOGIN_SUCCESS,
+                payload: response.data
+            });
+            authenticateUser();
+        } catch (error) {
+            const alert = {
+                message: error.response.data.message,
+            };
+            dispatch({
+                type: LOGIN_ERROR,
+                payload: alert
+            });
+        }
+    }
+
+    const logout = async () => {
+        const response = await Service.post('/logout');
+        dispatch({
+            type: LOGOUT,
+            payload: response.data.message
+        });
+    }
+
+    const authenticateUser = async () => {
+        try {
+            const response = await Service.get('/loggedin');
+            dispatch({
+                type: GET_USER,
+                payload: response.data
+            });
+        } catch (error) {
+            dispatch({
+                type: LOGIN_ERROR
+            });
+        }
+    }
 
     return (
         <AuthContext.Provider
@@ -58,7 +92,10 @@ const AuthState = props => {
                 user: state.user,
                 message: state.message,
                 loading: state.loading,
-                signup
+                signup,
+                login,
+                logout,
+                authenticateUser
             }}
         >
             {props.children}
