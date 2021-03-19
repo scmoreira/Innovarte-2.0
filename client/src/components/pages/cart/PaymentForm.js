@@ -4,13 +4,24 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 
+import useStyles from './cart.styles';
+
 const PaymentForm = () => {
+
+    const classes = useStyles();
+    
     return(
         <>
-            <Typography variant='h6' gutterBottom>Método de pago</Typography>
-            <Grid container spacing={3}>
+            <Typography variant='h3' gutterBottom>Método de pago</Typography>
+            <Grid container spacing={2} component='form' className={classes.form}>
                 <Grid item xs={12} md={6}>
-                    <TextField required id='cardName' label='Cardholder' fullWidth autoComplete='cc-name' variant='outlined'/>
+                    <TextField
+                        required
+                        id='cardName'
+                        label='Cardholder'
+                        fullWidth
+                        autoComplete='cc-name'
+                        variant='outlined' />
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <TextField
@@ -30,7 +41,7 @@ const PaymentForm = () => {
                         required
                         id='cvv'
                         label='CVV'
-                        helperText='Verification code'
+                        helperText='* Verification code'
                         fullWidth
                         autoComplete='cc-csc'
                         variant='outlined'

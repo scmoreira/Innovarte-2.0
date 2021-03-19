@@ -11,13 +11,15 @@ const useStyles = makeStyles(theme => ({
         width: '80%',
         margin: '0 auto',
         '& p': {
-                marginTop: '1.5rem',
-                marginBottom: '.5rem'
+            marginTop: '1.5rem',
+            marginBottom: '.5rem',
+            color: theme.palette.text.terciary
             },
         '& span': {
             fontFamily: "'Allura', cursive",
             fontSize: '1.5rem',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            color: theme.palette.text.primary
         }
     },
     howItWorksSection: {

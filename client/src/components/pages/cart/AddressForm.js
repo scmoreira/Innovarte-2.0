@@ -6,11 +6,16 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
+import useStyles from './cart.styles';
+
 const AddressForm = () => {
+
+    const classes = useStyles();
+
     return (
         <>
-            <Typography variant='h6' gutterBottom>Shipping Address</Typography>
-            <Grid container spacing={2}>
+            <Typography variant='h3' gutterBottom>Shipping Address</Typography>
+            <Grid container spacing={2} component='form' className={classes.form}>
                 <Grid item xs={12} md={6}>
                     <TextField
                         required
@@ -66,7 +71,13 @@ const AddressForm = () => {
                     />
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <TextField id='state' name='state' label='State' fullWidth variant='outlined' />
+                    <TextField
+                        id='state'
+                        name='state'
+                        label='State'
+                        fullWidth
+                        variant='outlined'
+                    />
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <TextField
@@ -92,7 +103,13 @@ const AddressForm = () => {
                 </Grid>
                 <Grid item xs={12}>
                     <FormControlLabel
-                        control={<Checkbox color='secondary' name='saveAddress' value='yes' />}
+                        control={
+                            <Checkbox
+                                name='saveAddress'
+                                value='yes'
+                                className={classes.checkbox}
+                            />
+                        }
                         label='Use this address for payment.'
                     />
                 </Grid>

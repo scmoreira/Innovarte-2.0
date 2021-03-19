@@ -14,10 +14,13 @@ const useStyles = makeStyles((theme) => ({
         '@media (max-width: 650px )': {
             marginTop: '3%'
         }
+    },
+    submitButton: {
+        margin: theme.spacing(3, 0, 2)
     }
 }));
 
-const DeleteButton = () => {
+export const DeleteButton = () => {
     return (
         <Tooltip title='Delete' arrow>
             <IconButton aria-label='delete'>
@@ -28,7 +31,7 @@ const DeleteButton = () => {
     );
 }
 
-const AddToCartButton = () => {
+export const AddToCartButton = () => {
     return (
         <Tooltip title='Add' arrow>
             <IconButton aria-label='add to shopping cart'>
@@ -39,7 +42,7 @@ const AddToCartButton = () => {
     );
 }
 
-const GoBackButton = props => {
+export const GoBackButton = props => {
     const classes = useStyles();
     return (
         <Button
@@ -54,7 +57,7 @@ const GoBackButton = props => {
     );
 }
 
-const EditButton = () => {
+export const EditButton = () => {
     const classes = useStyles();
     return (
         <Button
@@ -68,4 +71,17 @@ const EditButton = () => {
     );
 }
 
-export { DeleteButton, AddToCartButton, GoBackButton, EditButton };
+export const SubmitButton = props => {
+    const classes = useStyles();
+    return (
+        <Button
+            type='submit'
+            fullWidth
+            variant='contained'
+            color='primary'
+            className={classes.submitButton}
+        >
+            {props.text}
+        </Button>
+    ); 
+}

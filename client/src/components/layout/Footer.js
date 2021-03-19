@@ -8,7 +8,7 @@ const useStyle = makeStyles(theme => ({
         bottom: 0,
         left: 0,
         width: '100%',
-        height: '30px',
+        height: '40px',
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.text.secondary,
         fontFamily: "'Allura', cursive",
@@ -20,7 +20,7 @@ const useStyle = makeStyles(theme => ({
         textAlign: 'center',
     },
     footerText: {
-        margin: '3px auto',
+        margin: '10px auto',
         '@media (max-width: 900px)': {
             margin: '7px'
         }

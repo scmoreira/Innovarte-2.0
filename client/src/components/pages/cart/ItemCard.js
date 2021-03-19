@@ -1,12 +1,12 @@
 import React from 'react';
 
+import { DeleteButton } from '../../shared/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -43,7 +43,7 @@ const ItemCard = item => {
                             Materials: {item.materials} | Size: {item.size}
                         </Typography>
                         <Typography variant='body2'>
-                            <DeleteForeverOutlinedIcon  color='error' fontSize='large'/>
+                            <DeleteButton />
                         </Typography>
                         </CardContent>
                     </div>
