@@ -20,4 +20,6 @@ export const DELETE_ARTWORK = 'DELETE_ARTWORK'
 
 // User types
 
-
+// Alert types
+export const SHOW_ALERT = 'SHOW_ALERT'
+export const HIDE_ALERT = 'HIDE_ALERT'
