@@ -7,9 +7,6 @@ const uploader = require('../configs/cloudinary.config');
 const User = require('./../models/user.model');
 const Artworks = require('./../models/artwork.model');
 
-//const checkLoggedIn = (req, res, next) => req.isAuthenticated() ? next() : console.log('No authorized!');
-
-
 // Endpoints
 
 // Update profile
