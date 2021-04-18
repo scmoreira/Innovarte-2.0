@@ -19,6 +19,17 @@ export const EDIT_ARTWORK = 'EDIT_ARTWORK'
 export const DELETE_ARTWORK = 'DELETE_ARTWORK'
 
 // User types
+export const EDIT_PROFILE = 'EDIT_PROFILE'
+export const GET_ALL_USER_ARTWORKS = 'GET_ALL_USER_ARTWORKS'
+export const UPDATE_BUYED_ARTWORKS = 'UPDATE_BUYED_ARTWORKS'
+export const GET_ON_SELL_ARTWORKS = 'GET_ON_SELL_ARTWORKS'
+export const GET_SOLD_ARTWORKS = 'GET_SOLD_ARTWORKS'
+export const ERROR = 'ERROR'
+
+// Cart types
+export const GET_USER_CART = 'GET_USER_CART'
+export const ADD_ITEM = 'ADD_ITEM'
+export const DELETE_ITEM = 'DELETE_ITEM'
 
 // Alert types
 export const SHOW_ALERT = 'SHOW_ALERT'
