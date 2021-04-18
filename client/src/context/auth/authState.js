@@ -104,14 +104,3 @@ const AuthState = props => {
 }
 
 export default AuthState;
-
-
-
-
-
-
-
-// signup = user => this.api.post('/signup', user)
-//     login = user => this.api.post('/login', user)
-//     logout = () => this.api.post('/logout')
-//     isLoggedIn = () => this.api.get('/loggedin')

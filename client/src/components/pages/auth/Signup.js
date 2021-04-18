@@ -44,7 +44,6 @@ const Signup = props => {
   }
 
   const handleSubmit = e => {
-    
     e.preventDefault();
 
     if (role === '') {
