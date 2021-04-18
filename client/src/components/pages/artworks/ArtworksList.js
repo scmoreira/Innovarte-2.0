@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import ArtworkContext from '../../../context/artworks/artworkContext';
 
@@ -14,7 +14,8 @@ const ArtworksList = () => {
     const { artworks, artists, getArtworksOnSell, getArtworksByTag, getArtworksByArtist, getArtists } = artworkContext;
   
     const artistOptions = { options: artists.map((option) => option.artist) }
-    const tags = ['All','Painting', 'Sculpture', 'Drawing', 'Crafts', 'Photography', 'Other'];
+    const tags = ['All', 'Painting', 'Sculpture', 'Drawing', 'Crafts', 'Photography', 'Other'];
+    const [tag, setTag] = useState('');
     
     const classes = useStyles();
 
@@ -25,21 +26,24 @@ const ArtworksList = () => {
     }, []);
 
     const handleArtistFilter = (event, artist) => {
-        
         event.preventDefault();
 
-        if (artist === null) {
+        if (artist == null) {
             getArtworksOnSell();
         }
-        getArtworksByArtist(artist);
+        else {
+            getArtworksByArtist(artist);
+        }
     }
 
     const handleTagFilter = event => {
         let tag = event.target.value;
+        setTag(tag);
 
         if (tag === 'All') {
             getArtworksOnSell();
-        } else {
+        }
+        else {
             getArtworksByTag(tag);
         }
     }
@@ -62,6 +66,7 @@ const ArtworksList = () => {
                         />
                     )}
                 />
+                {/* This form is causing a findDOMNode warning, see to resolve it */}
                 <FormControl
                     className={classes.formControl}
                     variant='filled'
@@ -70,7 +75,7 @@ const ArtworksList = () => {
                     <Select
                         labelId='select-tag'
                         name='tags'
-                        value= ''
+                        value={tag}
                         onChange={handleTagFilter}
                     >
                         {tags.sort().map((tag, index) => (
