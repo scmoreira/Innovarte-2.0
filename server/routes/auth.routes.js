@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const passport = require("passport");
-const bcrypt = require("bcrypt");
+const passport = require('passport');
+const bcrypt = require('bcrypt');
 
-const User = require("../models/user.model");
+const User = require('../models/user.model');
 
 router.post('/signup', (req, res) => {
 
@@ -22,7 +22,7 @@ router.post('/signup', (req, res) => {
     User.findOne({ username }, (err, foundUser) => {
 
         if (err) {
-            res.status(500).json({ message: "User not found" });
+            res.status(500).json({ message: 'User not found' });
             return;
         }
 

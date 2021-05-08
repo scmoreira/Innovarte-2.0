@@ -9,27 +9,27 @@ const Artworks = require('../models/artwork.model');
 // Endpoints
 
 // List of artworks
-// router.get('/getAllArtworks', (req, res) => {
+router.get('/getAllArtworks', (req, res) => {
 
-//     Artworks
-//         .find()
-//         .then(response => res.json(response))
-//         .catch(err => res.status(500).json(err))
-// });
+    Artworks
+        .find()
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+});
 
 // Find one artwork
-// router.get('/getOneArtwork/:artwork_id', (req, res) => {
+router.get('/getOneArtwork/:artwork_id', (req, res) => {
 
-//     if (!mongoose.Types.ObjectId.isValid(req.params.artwork_id)) {
-//         res.status(400).json({ message: 'Specified id is not valid' });
-//         return;
-//     }
+    if (!mongoose.Types.ObjectId.isValid(req.params.artwork_id)) {
+        res.status(400).json({ message: 'Specified id is not valid' });
+        return;
+    }
 
-//     Artworks
-//         .findById(req.params.artwork_id)
-//         .then(response => res.json(response))
-//         .catch(err => res.status(500).json(err))
-// });
+    Artworks
+        .findById(req.params.artwork_id)
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+});
 
 // Find the artworks of an artist
 router.get('/getArtworksByArtist/:artist', (req, res) => {
