@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+
+import CartContext from '../../../context/cart/cartContext';
 
 import { DeleteButton } from '../../shared/Button';
 import Typography from '@material-ui/core/Typography';
@@ -22,25 +24,38 @@ const useStyles = makeStyles({
     },
 });
 
-const ItemCard = item => {
+const ItemCard = ( item ) => {
+    
+    const cartContext = useContext(CartContext);
+    const { artwork, getArtwork } = cartContext;
 
     const classes = useStyles();
+    
+    useEffect(() => {
+        getArtwork(item);
+    }, []);
 
+    if (!artwork) {
+        return null;
+    }
+
+    console.log(artwork)
+    
     return (
         <Grid item xs={12} md={6}>
             <CardActionArea component='a' href='#'>
                 <Card className={classes.card}>
-                    <CardMedia className={classes.cardMedia} image={item.image} />
+                    <CardMedia className={ classes.cardMedia } image={ artwork.image} />
                     <div className={classes.cardDetails}>
                         <CardContent>
                         <Typography component='h2' variant='h5'>
-                            {item.title}
+                                { artwork.title}
                         </Typography>
                         <Typography variant='body2' color='textSecondary'>
-                            {item.description}
+                                { artwork.description}
                         </Typography>
                         <Typography variant='body2' paragraph>
-                            Materials: {item.materials} | Size: {item.size}
+                                Materials: { artwork.materials } | Size: { artwork.size}
                         </Typography>
                         <Typography variant='body2'>
                             <DeleteButton />

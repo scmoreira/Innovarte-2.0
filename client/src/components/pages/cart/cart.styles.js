@@ -25,7 +25,10 @@ const useStyles = makeStyles(theme => ({
     },
     checkbox: {
         color: theme.palette.primary.main
-    }
+    },
+    spanUser: {
+        textTransform: "capitalize"
+    },
 }));
 
 export default useStyles;
