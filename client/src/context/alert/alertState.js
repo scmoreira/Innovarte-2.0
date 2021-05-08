@@ -14,7 +14,7 @@ const AlertState = props => {
     const showAlert = message => {
         dispatch({
             type: SHOW_ALERT,
-            payload: message
+            payload: message.message
         });
 
         setTimeout(() => {

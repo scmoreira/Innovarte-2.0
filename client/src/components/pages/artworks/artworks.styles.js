@@ -28,7 +28,11 @@ const useStyles = makeStyles(theme => ({
         maxWidth: 400,
         height: 'auto',
         margin: '2% 0',
-        textAlign: 'center'
+        textAlign: 'center',
+
+        '&:hover': {
+            transform: 'scale(1.1)',
+        }
     },
     cardContent: {
         paddingBottom: 0,
@@ -49,6 +53,10 @@ const useStyles = makeStyles(theme => ({
             size: 'small',
             color: theme.palette.text.terciary
         }
+    },
+
+    spanArtist: {
+        textTransform: "capitalize",
     },
 
     /* Artwork details */

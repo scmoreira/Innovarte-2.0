@@ -3,7 +3,7 @@ import { HashLink as Link } from 'react-router-hash-link';
 
 import AuthContext from '../../../context/auth/authContext';
 
-import { Button } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import useStyles from './navBar.styles';
 

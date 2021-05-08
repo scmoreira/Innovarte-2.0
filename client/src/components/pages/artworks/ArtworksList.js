@@ -4,8 +4,14 @@ import ArtworkContext from '../../../context/artworks/artworkContext';
 
 import ArtworkCard from './ArtworkCard';
 
-import { FormControl, Grid, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
+import FormControl from '@material-ui/core/FormControl';
+import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+
 import useStyles from './artworks.styles';
 
 const ArtworksList = () => {

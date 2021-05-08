@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link as RouterLink } from "react-router-dom";
 
-import { IconButton, Badge } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import Badge from '@material-ui/core/Badge';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 

@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { Capitalize } from '../../shared/helpers';
 import { AddToCartButton } from '../../shared/Button';
-import { Modal } from '@material-ui/core';
+import Modal from '@material-ui/core/Modal';
 
 import useStyles from './artworks.styles';
 
@@ -30,7 +29,7 @@ const ArtworkDetails = props => {
                         <div className={`col-md-12 col-lg-6 ${classes.detailsContent}`}>
                             <div>
                                 <h1>{title}</h1>
-                                <p>by <i>{ Capitalize(artist)}</i></p>
+                                <p>by <span className={ classes.spanArtist }>{ artist }</span></p>
                                 <p>{description}</p>
                                 <p><span className='text-muted'>Materials: {materials} |Size: {size}</span></p>
                                 <p>Price: {price} {currency}</p>

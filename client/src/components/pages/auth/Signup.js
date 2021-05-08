@@ -10,11 +10,11 @@ import Avatar from '@material-ui/core/Avatar';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import AssignmentIndOutlinedIcon from '@material-ui/icons/AssignmentIndOutlined';
 import Typography from '@material-ui/core/Typography';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import AssignmentIndOutlinedIcon from '@material-ui/icons/AssignmentIndOutlined';
 
 import useStyles from './authForms.styles';
 

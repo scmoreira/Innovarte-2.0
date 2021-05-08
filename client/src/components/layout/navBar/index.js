@@ -4,7 +4,8 @@ import Brand from './Brand';
 import DesktopNav from './DesktopNav';
 import MobileNav from './MobileNav';
 
-import { AppBar, Toolbar } from '@material-ui/core';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 import useStyles from './navBar.styles';

@@ -2,7 +2,8 @@ import React from 'react';
 import { Link as RouterLink } from "react-router-dom";
 
 import Logo from '../../shared/images/logo.png';
-import { Avatar, Button } from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 import useStyles from './navBar.styles';

@@ -4,7 +4,9 @@ import NavLinks from './NavLinks';
 import Logout from './Logout';
 import CartIcon from './CartIcon';
 
-import { Toolbar, IconButton, Drawer } from '@material-ui/core';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Drawer from '@material-ui/core/Drawer';
 import MenuIcon from '@material-ui/icons/Menu';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import useStyles from './navBar.styles';

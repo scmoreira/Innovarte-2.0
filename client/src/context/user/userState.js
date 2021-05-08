@@ -23,7 +23,7 @@ const UserState = props => {
         soldArtworks: [],
         buyedArtworks: [],
         message: null
-    }
+    };
 
     const [state, dispatch] = useReducer(UserReducer, initialState);
 
@@ -43,7 +43,7 @@ const UserState = props => {
                 payload: alert
             });
         }
-    }
+    };
 
     const getAllUserArtworks = async userId => {
         try {
@@ -61,7 +61,7 @@ const UserState = props => {
                 payload: alert
             });
         }
-    }
+    };
 
     const getOnSellArtworks = async userId => {
         try {
@@ -79,7 +79,7 @@ const UserState = props => {
                 payload: alert
             });
         }
-    }
+    };
 
     const getSoldArtworks = async userId => {
         try {
@@ -97,7 +97,7 @@ const UserState = props => {
                 payload: alert
             });
         }
-    }
+    };
 
     const updateBuyedArtworks = async (userId, artworkId) => {
         try {
@@ -115,11 +115,11 @@ const UserState = props => {
                 payload: alert
             });
         }
-    }
+    };
 
     return (
         <UserContext.Provider
-            value={{
+            value={ {
                 userProfileDetails: state.userProfileDetails,
                 allArtworks: state.allArtworks,
                 onSellArtworks: state.onSellArtworks,
@@ -131,11 +131,11 @@ const UserState = props => {
                 getOnSellArtworks,
                 getSoldArtworks,
                 updateBuyedArtworks
-            }}
+            } }
         >
-            {props.children}
+            {props.children }
         </UserContext.Provider>
     );
-}
+};
 
 export default UserState;

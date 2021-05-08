@@ -8,7 +8,6 @@ export const GET_USER = 'GET_USER'
 
 // Artwork types
 //export const GET_ALL_ARTWORKS = 'GET_ALL_ARTWORKS'
-//export const GET_ONE_ARTWORK = 'GET_ONE_ARTWORK'
 export const GET_AVAILABLE_ARTWORKS = 'GET_AVAILABLE_ARTWORKS'
 export const GET_ARTWORKS_BY_ARTIST = 'GET_ARTWORKS_BY_ARTIST'
 export const GET_ARTISTS = 'GET_ARTISTS'
@@ -28,6 +27,7 @@ export const ERROR = 'ERROR'
 
 // Cart types
 export const GET_USER_CART = 'GET_USER_CART'
+export const GET_ONE_ARTWORK = 'GET_ONE_ARTWORK'
 export const ADD_ITEM = 'ADD_ITEM'
 export const DELETE_ITEM = 'DELETE_ITEM'
 

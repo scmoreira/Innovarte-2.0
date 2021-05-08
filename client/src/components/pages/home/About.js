@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container } from '@material-ui/core';
+import Container from '@material-ui/core/Container';
 import useStyles from './sections.styles';
 
 const About = () => {

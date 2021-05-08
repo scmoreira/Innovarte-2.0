@@ -1,7 +1,6 @@
 
 import {
     GET_AVAILABLE_ARTWORKS,
-    //GET_ONE_ARTWORK,
     GET_ARTWORKS_BY_ARTIST,
     GET_ARTISTS,
     GET_ARTWORKS_BY_TAG,
@@ -19,11 +18,6 @@ const ArtworkReducer = (state, action) => {
                 ...state,
                 artworks: action.payload
             }
-        // case GET_ONE_ARTWORK:
-        //     return {
-        //         ...state,
-        //         artwork: action.payload
-        //     }
         case GET_ARTWORKS_BY_ARTIST:
             return {
                 ...state,

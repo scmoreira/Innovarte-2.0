@@ -3,7 +3,7 @@ import React, { useReducer } from 'react';
 import AuthContext from './authContext';
 import AuthReducer from './authReducer';
 
-import Service from '../../service/service';
+import Service from '../../service';
 
 import {
     SIGNUP_SUCCESS,
