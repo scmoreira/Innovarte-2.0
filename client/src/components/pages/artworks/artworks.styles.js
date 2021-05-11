@@ -5,6 +5,7 @@ const useStyles = makeStyles(theme => ({
     /* Atworks List */
     artworksListRoot: {
         margin: '1% auto',
+        minHeight: '600px',
         backgroundColor: theme.palette.background.paper,
         backgroundImage: 'url("https://www.transparenttextures.com/patterns/brick-wall.png")'
     },
@@ -29,6 +30,7 @@ const useStyles = makeStyles(theme => ({
         height: 'auto',
         margin: '2% 0',
         textAlign: 'center',
+        transition: 'transform 1s',
 
         '&:hover': {
             transform: 'scale(1.1)',
@@ -39,10 +41,11 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.text.terciary
     },
     cardMedia: {
+        minWidth: 200,
         maxWidth: '100%',
-        height: 200,
+        height: 150,
         objectFit: 'contain',
-        border: '0.3vw solid',
+        border: '4px solid',
         borderRadius: '2px',
         boxShadow: 'inset 0 0 1px 4px #fff'
     },
@@ -54,7 +57,6 @@ const useStyles = makeStyles(theme => ({
             color: theme.palette.text.terciary
         }
     },
-
     spanArtist: {
         textTransform: "capitalize",
     },
