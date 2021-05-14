@@ -7,9 +7,9 @@ const User = require('../models/user.model');
 
 router.post('/signup', (req, res) => {
 
-    const { username, password, avatar, email, role } = req.body;
+    const { username, password, avatar, email, firstName, lastName, role } = req.body;
     
-    if (!username || !password || !email) {
+    if (!username || !password || !email || !firstName || !lastName || !role) {
         res.status(400).json({ message: 'All fields required' });
         return;
     }
@@ -34,7 +34,7 @@ router.post('/signup', (req, res) => {
         const salt = bcrypt.genSaltSync(10);
         const hashPass = bcrypt.hashSync(password, salt);
 
-        const aNewUser = new User({ username, password: hashPass, avatar, email, role });
+        const aNewUser = new User({ username, password: hashPass, avatar, email, firstName, lastName, role });
 
         aNewUser.save(err => {
             if (err) {

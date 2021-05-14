@@ -7,6 +7,7 @@ const userSchema = new Schema({
         required: true,
         unique: true,
         minlength: 5,
+        trim: true,
         lowercase: true
     },
     password: {
@@ -14,22 +15,33 @@ const userSchema = new Schema({
         required: true,
         minlength: 5,
     },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true
+    },
+    firstName: {
+        type: String,
+        required: true,
+    },
+    lastName: {
+        type: String,
+        required: true,
+    },
     avatar: {
         type: String,
         default: '/images/avatar-default.png',
-    },
-    email: {
-        type: String,
-        required: true
     },
     role: {
         type: String,
         enum: ['admin', 'user', 'artist'],
         required: true
     },
-    cart: {
-        type: [String],
-    },
+    cart: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Artwork'
+    }],
     buyed: {
         type: [String],
     },
