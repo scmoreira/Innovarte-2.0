@@ -17,8 +17,8 @@ import useStyles from './authForms.styles';
 
 const Login = props => {
 
-  const authContext = useContext(AuthContext);
-  const alertContext = useContext(AlertContext);
+  const { authenticated, message, login } = useContext(AuthContext);
+  const { alert, showAlert } = useContext(AlertContext);
 
   const [user, setUser] = useState({
     username: '',
@@ -27,21 +27,17 @@ const Login = props => {
 
   const classes = useStyles();
 
-  const { authenticated, message, login } = authContext;
-  const { alert, showAlert } = alertContext;
-  const { username, password } = user;
-
   const handleChange = e => {
     setUser({
       ...user,
       [e.target.name]: e.target.value
     });
-  }
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
     login(user);
-  }
+  };
 
   useEffect(() => {
     if (authenticated) {
@@ -54,43 +50,43 @@ const Login = props => {
   }, [message, authenticated, props.history]);
 
   return (
-      <Grid item sm={12} md={6} component={Paper} elevation={3}>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOpenOutlinedIcon />
-          </Avatar>
-          <Typography component='h1' variant='h5'>
-            Log in
+    <Grid item className={ classes.root } md={ 10 } component={ Paper } elevation={ 3 }>
+      <div className={ classes.paper }>
+        <Avatar className={ classes.avatar }>
+          <LockOpenOutlinedIcon />
+        </Avatar>
+        <Typography component='h1' variant='h5'>
+          Log in
           </Typography>
-          <form className={classes.form} onSubmit={handleSubmit}>
-            <TextField
-              variant='outlined'
-              margin='normal'
-              required
-              fullWidth
-              label='Username'
-              name='username'
-              value={username}
-              autoComplete='username'
-              onChange={handleChange}
-            />
+        <form className={ classes.form } onSubmit={ handleSubmit }>
           <TextField
-              variant='outlined'
-              margin='normal'
-              required
-              fullWidth
-              name='password'
-              value={password}
-              label='Password'
-              type='password'
-              onChange={handleChange}
-            />
-            {alert && <AlertError text={alert} />}
-            <SubmitButton text='Log in'/>
-          </form>
-        </div>
-      </Grid>
+            variant='outlined'
+            margin='normal'
+            required
+            fullWidth
+            label='Username'
+            name='username'
+            value={ user.username }
+            autoComplete='username'
+            onChange={ handleChange }
+          />
+          <TextField
+            variant='outlined'
+            margin='normal'
+            required
+            fullWidth
+            name='password'
+            value={ user.password }
+            label='Password'
+            type='password'
+            onChange={ handleChange }
+          />
+          { alert && <AlertError text={ alert } /> }
+          <SubmitButton text='Log in' />
+        </form>
+      </div>
+    </Grid>
   );
-}
+};
 
 export default Login;

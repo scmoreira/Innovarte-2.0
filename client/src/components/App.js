@@ -10,7 +10,8 @@ import CartState from '../context/cart/cartState';
 import PrivateRoute from './routes/PrivateRoute';
 import Navbar from './layout/navBar';
 import Home from './pages/home';
-import AuthForms from './pages/auth';
+import Signup from './pages/auth/Signup';
+import Login from './pages/auth/Login';
 import ArtworksList from './pages/artworks/ArtworksList';
 import ArtworkDetails from './pages/artworks/ArtworkDetails';
 import UserProfile from './pages/userProfile/';
@@ -36,8 +37,8 @@ function App() {
                     <Navbar />
                     <Switch>
                       <Route exact path='/' component={ Home } />
-                      <Route exact path='/signup' component={ AuthForms } />
-                      <Route exact path='/login' component={ AuthForms } />
+                      <Route exact path='/signup' component={ Signup } />
+                      <Route exact path='/login' component={ Login } />
                       <Route exact path='/artworks' component={ ArtworksList } />
                       <Route exact path='/artworks/details/:artwork_id' component={ ArtworkDetails } />
                       <Route exact path='/cart' component={ Cart } />

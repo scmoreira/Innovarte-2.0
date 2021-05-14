@@ -1,6 +1,4 @@
-import React, { useContext, useEffect } from 'react';
-
-import CartContext from '../../../context/cart/cartContext';
+import React from 'react';
 
 import { DeleteButton } from '../../shared/Button';
 import Typography from '@material-ui/core/Typography';
@@ -14,58 +12,47 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
     card: {
-      display: 'flex',
+        display: 'flex',
+        marginBottom: '5%'
     },
     cardDetails: {
-      flex: 1,
+        flex: 1,
     },
     cardMedia: {
-      width: 160,
+        width: '40%',
+        objectFit: 'contain'
     },
 });
 
-const ItemCard = ( item ) => {
-    
-    const cartContext = useContext(CartContext);
-    const { artwork, getArtwork } = cartContext;
-
+const ItemCard = ({ item }) => {
+    const { image, title, description, price } = item;
     const classes = useStyles();
-    
-    useEffect(() => {
-        getArtwork(item);
-    }, []);
 
-    if (!artwork) {
-        return null;
-    }
-
-    console.log(artwork)
-    
     return (
-        <Grid item xs={12} md={6}>
+        <Grid item xs={ 12 } md={ 10 }>
             <CardActionArea component='a' href='#'>
-                <Card className={classes.card}>
-                    <CardMedia className={ classes.cardMedia } image={ artwork.image} />
-                    <div className={classes.cardDetails}>
+                <Card className={ classes.card }>
+                    <CardMedia className={ classes.cardMedia } image={ image } />
+                    <div className={ classes.cardDetails }>
                         <CardContent>
-                        <Typography component='h2' variant='h5'>
-                                { artwork.title}
-                        </Typography>
-                        <Typography variant='body2' color='textSecondary'>
-                                { artwork.description}
-                        </Typography>
-                        <Typography variant='body2' paragraph>
-                                Materials: { artwork.materials } | Size: { artwork.size}
-                        </Typography>
-                        <Typography variant='body2'>
-                            <DeleteButton />
-                        </Typography>
+                            <Typography component='h2' variant='h5'>
+                                { title }
+                            </Typography>
+                            <Typography variant='body2' color='textSecondary'>
+                                { description }
+                            </Typography>
+                            <Typography variant='body2' paragraph>
+                                Price: { price } EUR
+                            </Typography>
+                            <Typography variant='body2'>
+                                <DeleteButton />
+                            </Typography>
                         </CardContent>
                     </div>
                 </Card>
             </CardActionArea>
         </Grid>
     );
-}
+};
 
 export default ItemCard;

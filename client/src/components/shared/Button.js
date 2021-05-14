@@ -33,9 +33,9 @@ export const DeleteButton = () => {
     );
 }
 
-export const AddToCartButton = () => {
+export const AddToCartButton = props => {
     return (
-        <Tooltip title='Add' arrow>
+        <Tooltip title='Add' arrow onClick={props.onClick}>
             <IconButton aria-label='add to shopping cart'>
                 <AddShoppingCartOutlinedIcon color='primary' fontSize='large'/>
             </IconButton> 

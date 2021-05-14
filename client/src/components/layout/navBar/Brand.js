@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link as RouterLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Logo from '../../shared/images/logo.png';
 import Avatar from '@material-ui/core/Avatar';
@@ -18,7 +18,7 @@ const Brand = () => {
             <Avatar src={Logo} className={classes.brandLogo} />
             <Button
                 className= {trigger ? `${classes.brandLink} ${classes.active}`: classes.brandLink}
-                component={RouterLink}
+                component={ Link}
                 to='/'
             >
                 innovarte

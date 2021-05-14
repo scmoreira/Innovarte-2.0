@@ -107,7 +107,6 @@ const AddressForm = () => {
                             <Checkbox
                                 name='saveAddress'
                                 value='yes'
-                                className={classes.checkbox}
                             />
                         }
                         label='Use this address for payment.'

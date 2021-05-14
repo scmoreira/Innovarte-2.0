@@ -7,9 +7,8 @@ import Service from '../../service';
 
 import {
     GET_USER_CART,
-    GET_ONE_ARTWORK,
-    ADD_ITEM,
-    DELETE_ITEM,
+    //ADD_ITEM,
+    //DELETE_ITEM,
 } from '../../types';
 
 const CartState = props => {
@@ -29,35 +28,18 @@ const CartState = props => {
             const response = await Service.get(`/cart/${userId}`);
             dispatch({
                 type: GET_USER_CART,
-                payload: response.data.cart
+                payload: response.data
             });
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     }
-
-    const getArtwork = async (id) => {
-        try {
-            const response = await Service.get(`/getOneArtwork/${id}`);
-            dispatch({
-                type: GET_ONE_ARTWORK,
-                payload: response.data
-            })
-        } catch (error) {
-            console.log(error)
-        }
-    };
 
     return (
         <CartContext.Provider
             value={ {
                 cartItems: state.cartItems,
-                artwork: state.artwork,
-                itemToAdd: state.itemToAdd,
-                itemToDelete: state.itemToDelete,
-                message: state.message,
-                getUserCart,
-                getArtwork,
+                getUserCart
             }}
         >
             {props.children}

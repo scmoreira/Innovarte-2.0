@@ -5,12 +5,13 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(4, 5),
         marginBottom: '5%',
         textAlign: 'center',
+        backgroundImage: 'url("https://www.transparenttextures.com/patterns/brick-wall.png")',
         '& section': {
             marginTop: '5%'
         },
         '& p': {
             color: theme.palette.text.terciary
-        }
+        },
     },
     emptyCart: {
         '& a': {
@@ -21,13 +22,14 @@ const useStyles = makeStyles(theme => ({
         marginBottom: theme.spacing(2),
         '& label': {
             color: theme.palette.text.primary
-        }
+        },
+        '& .MuiCheckbox-root': {
+            color: theme.palette.primary.main,
+        },
     },
-    checkbox: {
-        color: theme.palette.primary.main
-    },
-    spanUser: {
-        textTransform: "capitalize"
+    summary: {
+        display: 'flex',
+        maxWidth: '75%'
     },
 }));
 

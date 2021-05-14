@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link as RouterLink } from "react-router-dom";
+
+import AuthContext from '../../../context/auth/authContext';
 
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
@@ -9,14 +11,18 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import useStyles from './navBar.styles';
 
 const CartIcon = () => {
+
+    const { user } = useContext(AuthContext);
  
-    const [items, setItems] = useState(1);
+    const [items, setItems] = useState(0);
     const trigger = useScrollTrigger({ threshold: 100 });
     const classes = useStyles();
 
     useEffect(() => {
-        // revisar el context por si hay cambios
-    }, []);
+        if (user) {
+            setItems(user.cart.length);
+        }
+    }, [user]);
 
     return (
         <IconButton

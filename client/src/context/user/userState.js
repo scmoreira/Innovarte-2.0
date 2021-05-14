@@ -22,6 +22,7 @@ const UserState = props => {
         onSellArtworks: [],
         soldArtworks: [],
         buyedArtworks: [],
+        inCartArtworks: [],
         message: null
     };
 
@@ -125,6 +126,7 @@ const UserState = props => {
                 onSellArtworks: state.onSellArtworks,
                 soldArtworks: state.soldArtworks,
                 buyedArtworks: state.buyedArtworks,
+                inCartArtworks: state.inCartArtworks,
                 message: state.message,
                 editProfile,
                 getAllUserArtworks,

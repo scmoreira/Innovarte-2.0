@@ -12,6 +12,10 @@ const ArtworkDetails = props => {
     const { open, onClose, artwork } = props;
     const { title, image, artist, price, currency, description, size, materials } = artwork;
 
+    const handleAddToCart = () => {
+       
+    }
+
     return (
         <Modal
             open={open}
@@ -35,7 +39,7 @@ const ArtworkDetails = props => {
                                 <p>Price: {price} {currency}</p>
                                 <div className='container-fluid'>
                                     <div className={`row ${classes.btnContainer}`}>
-                                        <AddToCartButton />
+                                        <AddToCartButton onClick={handleAddToCart} />
                                     </div>
                                 </div>
                             </div>

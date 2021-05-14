@@ -1,6 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import Service from '../../../service';
 import AuthContext from '../../../context/auth/authContext';
 import CartContext from '../../../context/cart/cartContext';
 
@@ -8,66 +9,62 @@ import Checkout from './Checkout';
 import ItemCard from './ItemCard';
 import { SubmitButton } from '../../shared/Button';
 import EuroOutlinedIcon from '@material-ui/icons/EuroOutlined';
-import SentimentVerySatisfiedOutlinedIcon from '@material-ui/icons/SentimentVerySatisfiedOutlined';
+
 import useStyles from './cart.styles';
 
 const Cart = () => {
 
-    const authContext = useContext(AuthContext);
-    const cartContext = useContext(CartContext);
+    const { user } = useContext(AuthContext);
+    const { getUserCart } = useContext(CartContext);
 
-    const { user, authenticateUser } = authContext;
-    const { cartItems, message, getUserCart } = cartContext;
-
+    const [items, setItems] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
     const classes = useStyles();
 
+    const printCart = () => {
+        Service.get(`/cart/${user._id}`)
+            .then(response => {
+                setItems(response.data.cart);
+                setTotalPrice(response.data.cart.reduce((acc, curr) => acc + curr.price, 0));
+            })
+            .catch(error => console.error(error));
+    };
+
     useEffect(() => {
-        authenticateUser();
         if (user) {
-            getUserCart(user._id);
+            printCart();
         }
-        // eslint-disable-next-line
-    }, []);  
+        //eslint-disable-next-line
+    }, []);
 
     return (
         <div>
-           <main className={classes.root}>
+            <main className={ classes.root }>
                 <h1>
-                    <SentimentVerySatisfiedOutlinedIcon fontSize='large' />
-                    Welcome 
-                    { user && <span className={ classes.spanUser }> { user.username }</span>}
+                    Welcome
+                    { user && <span capitalize='true'> { user.firstName } { user.lastName } </span> }
                 </h1>
-                { cartItems.length === 0 &&
-                    <div className={classes.emptyCart}>
+                { items.length === 0 &&
+                    <div className={ classes.emptyCart }>
                         <p>No items...</p>
                         <Link to='/artworks'>Choose your artwork</Link>
                     </div>
                 }
-                <section className='row'> 
-                    <div className='col-md-5'>
+                <section className='row'>
+                    <div className='col-md-7'>
                         <Checkout />
                     </div>
-                    <div className='col-md-7'>
-                        <ul >
-                            {cartItems.map(item =>
-                                <ItemCard key={item} item={{item}} />
-                            )}
-                            <div className='container-fluid'>
-                                <div className='row'>
-                                        <div className='col-9 col-lg-8'>
-                                            <h5>Total:  <EuroOutlinedIcon /></h5>
-                                        </div>
-                                    <div className='col-3 col-lg-4'>
-                                        <SubmitButton text='Confirm' />
-                                    </div>
-                                </div>
-                            </div>
-                        </ul>
+                    <div className='col-md-5'>
+                        { items.length > 0 && items.map(item => <ItemCard key={ item._id } item={ item } />) }
+                        <div className='summary'>
+                            <h3>Total:  <EuroOutlinedIcon /> { totalPrice }</h3>
+                            <SubmitButton text='Confirm' />
+                        </div>
                     </div>
                 </section>
             </main>
         </div>
     );
-}
+};
 
 export default Cart;

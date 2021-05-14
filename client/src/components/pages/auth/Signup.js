@@ -19,7 +19,7 @@ import AssignmentIndOutlinedIcon from '@material-ui/icons/AssignmentIndOutlined'
 import useStyles from './authForms.styles';
 
 const Signup = props => {
-  
+
   const authContext = useContext(AuthContext);
   const alertContext = useContext(AlertContext);
 
@@ -27,31 +27,28 @@ const Signup = props => {
     username: '',
     email: '',
     password: '',
+    firstName: '',
+    lastName: '',
     role: ''
   });
-    
+
   const classes = useStyles();
 
   const { authenticated, message, signup } = authContext;
   const { alert, showAlert } = alertContext;
-  const { username, email, password, role } = newUser;
+  const { username, email, password, firstName, lastName, role } = newUser;
 
   const handleChange = e => {
     setNewUser({
       ...newUser,
       [e.target.name]: e.target.value
     });
-  }
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    if (role === '') {
-      showAlert('Please select your role');
-      return;
-    }
-    signup({ username, email, password, role });
-  }
+    signup({ username, email, password, firstName, lastName, role });
+  };
 
   useEffect(() => {
     if (authenticated) {
@@ -64,50 +61,72 @@ const Signup = props => {
   }, [message, authenticated, props.history]);
 
   return (
-    <Grid item sm={12} md={6} component={Paper} elevation={3}>
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
+    <Grid item className={ classes.root } md={ 10 } component={ Paper } elevation={ 3 }>
+      <div className={ classes.paper }>
+        <Avatar className={ classes.avatar }>
           <AssignmentIndOutlinedIcon />
         </Avatar>
         <Typography component='h1' variant='h5'>
           Sign up
         </Typography>
-        <form className={classes.form} onSubmit={handleSubmit} >
-          <Grid container spacing={2}>
-            <Grid item sm={12}>
+        <form className={ classes.form } onSubmit={ handleSubmit } >
+          <Grid container spacing={ 2 }>
+            <Grid item xs={ 12 }>
+              <TextField
+                variant='outlined'
+                fullWidth
+                required
+                name='firstName'
+                value={ firstName }
+                label='First Name'
+                onChange={ handleChange }
+              />
+            </Grid>
+            <Grid item xs={ 12 }>
+              <TextField
+                variant='outlined'
+                fullWidth
+                required
+                name='lastName'
+                value={ lastName }
+                label='Last Name'
+                onChange={ handleChange }
+              />
+            </Grid>
+            <Grid item sm={ 12 }>
               <TextField
                 variant='outlined'
                 fullWidth
                 required
                 name='username'
-                value={username}
+                value={ username }
                 label='Username'
                 autoComplete='username'
-                onChange={handleChange}
+                onChange={ handleChange }
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={ 12 }>
               <TextField
                 variant='outlined'
                 fullWidth
                 required
                 name='email'
-                value={email}
+                value={ email }
                 label='Email Address'
                 autoComplete='email'
-                onChange={handleChange}
+                onChange={ handleChange }
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={ 12 }>
               <TextField
                 variant='outlined'
                 fullWidth
                 required
                 name='password'
-                value= {password}
+                value={ password }
                 label='Password'
                 type='password'
-                onChange={handleChange}
+                onChange={ handleChange }
               />
             </Grid>
             <RadioGroup row aria-label='role'>
@@ -116,25 +135,25 @@ const Signup = props => {
                 value='user'
                 label='User'
                 labelPlacement='start'
-                control={<Radio className={classes.radio} />}
-                onChange={handleChange}
+                control={ <Radio className={ classes.radio } /> }
+                onChange={ handleChange }
               />
               <FormControlLabel
                 name='role'
                 value='artist'
                 label='Artist'
                 labelPlacement='start'
-                control={<Radio className={classes.radio} />}
-                onChange={handleChange}
+                control={ <Radio className={ classes.radio } /> }
+                onChange={ handleChange }
               />
             </RadioGroup>
-            {alert && <AlertError text={alert} />}
+            { alert && <AlertError text={ alert } /> }
           </Grid>
           <SubmitButton text='Sign up' />
         </form>
       </div>
     </Grid>
   );
-}
+};
 
 export default Signup;

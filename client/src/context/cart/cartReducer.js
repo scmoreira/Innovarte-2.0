@@ -1,6 +1,5 @@
 import {
     GET_USER_CART,
-    GET_ONE_ARTWORK,
     ADD_ITEM,
     DELETE_ITEM
 } from '../../types';
@@ -12,11 +11,6 @@ const CartReducer = (state, action) => {
                 ...state,
                 cartItems: action.payload
             };
-        case GET_ONE_ARTWORK:
-            return {
-                ...state,
-                artwork: action.payload
-            }
         case ADD_ITEM:
             return {
                 ...state

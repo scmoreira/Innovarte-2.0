@@ -2,14 +2,17 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: '100vh'
+    margin: '0 auto',
+    background: 'url("https://www.transparenttextures.com/patterns/brick-wall.png")'
   },
   paper: {
-    margin: '80px auto',
+    margin: '5px auto',
+    padding: '10px 0 50px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    maxWidth: '50%'
+    maxWidth: '50%',
+    minHeight: '600px'
   },
   avatar: {
     margin: theme.spacing(1),
