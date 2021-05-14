@@ -26,10 +26,7 @@ const CartState = props => {
     const getUserCart = async userId => {
         try {
             const response = await Service.get(`/cart/${userId}`);
-            dispatch({
-                type: GET_USER_CART,
-                payload: response.data
-            });
+            return response.data.cart;
         } catch (error) {
             console.log(error);
         }

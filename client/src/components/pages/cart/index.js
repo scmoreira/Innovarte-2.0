@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import Service from '../../../service';
 import AuthContext from '../../../context/auth/authContext';
 import CartContext from '../../../context/cart/cartContext';
 
@@ -21,13 +20,15 @@ const Cart = () => {
     const [totalPrice, setTotalPrice] = useState(0);
     const classes = useStyles();
 
-    const printCart = () => {
-        Service.get(`/cart/${user._id}`)
-            .then(response => {
-                setItems(response.data.cart);
-                setTotalPrice(response.data.cart.reduce((acc, curr) => acc + curr.price, 0));
-            })
-            .catch(error => console.error(error));
+    const printCart = async () => {
+        try {
+            const response = await getUserCart(user._id);
+            setItems(response);
+            setTotalPrice(response.reduce((acc, curr) => acc + curr.price, 0));
+        } catch (error) {
+            console.log(error);
+        }
+        
     };
 
     useEffect(() => {

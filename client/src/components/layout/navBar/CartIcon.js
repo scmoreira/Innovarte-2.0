@@ -22,6 +22,7 @@ const CartIcon = () => {
         if (user) {
             setItems(user.cart.length);
         }
+        return () => setItems(0);
     }, [user]);
 
     return (
