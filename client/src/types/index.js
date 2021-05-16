@@ -26,9 +26,7 @@ export const GET_SOLD_ARTWORKS = 'GET_SOLD_ARTWORKS'
 export const ERROR = 'ERROR'
 
 // Cart types
-export const GET_USER_CART = 'GET_USER_CART'
-export const ADD_ITEM = 'ADD_ITEM'
-export const DELETE_ITEM = 'DELETE_ITEM'
+export const UPDATE_CART = 'UPDATE_CART'
 
 // Alert types
 export const SHOW_ALERT = 'SHOW_ALERT'

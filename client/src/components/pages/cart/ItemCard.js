@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import AuthContext from '../../../context/auth/authContext';
+import CartContext from '../../../context/cart/cartContext';
 
 import { DeleteButton } from '../../shared/Button';
 import Typography from '@material-ui/core/Typography';
@@ -25,8 +28,16 @@ const useStyles = makeStyles({
 });
 
 const ItemCard = ({ item }) => {
+
+    const { user } = useContext(AuthContext);
+    const { removeItemFromCart } = useContext(CartContext);
+
     const { image, title, description, price } = item;
     const classes = useStyles();
+
+    const handleDelete = () => {
+        removeItemFromCart(user._id, item._id);
+    }
 
     return (
         <Grid item xs={ 12 } md={ 10 }>
@@ -45,7 +56,7 @@ const ItemCard = ({ item }) => {
                                 Price: { price } EUR
                             </Typography>
                             <Typography variant='body2'>
-                                <DeleteButton />
+                                <DeleteButton onClick={handleDelete} />
                             </Typography>
                         </CardContent>
                     </div>

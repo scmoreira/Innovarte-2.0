@@ -28,7 +28,6 @@ const Cart = () => {
         } catch (error) {
             console.log(error);
         }
-        
     };
 
     useEffect(() => {

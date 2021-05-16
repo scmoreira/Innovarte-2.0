@@ -2,23 +2,16 @@ import React, { useReducer } from 'react';
 
 import CartContext from './cartContext';
 import CartReducer from './cartReducer';
-
 import Service from '../../service';
 
 import {
-    GET_USER_CART,
-    //ADD_ITEM,
-    //DELETE_ITEM,
+    UPDATE_CART
 } from '../../types';
 
 const CartState = props => {
 
     const InitialState = {
-        cartItems: [],
-        artwork: null,
-        itemToAdd: '',
-        itemToDelete: '',
-        message: null
+        itemsInCart: 0
     }
 
     const [state, dispatch] = useReducer(CartReducer, InitialState);
@@ -28,20 +21,62 @@ const CartState = props => {
             const response = await Service.get(`/cart/${userId}`);
             return response.data.cart;
         } catch (error) {
-            console.log(error);
+            // handle error
+        }
+    };
+
+    const getItemsInCart = async (userId) => {
+        try {
+            const response = await Service.get(`/cart/${userId}`);
+            dispatch({
+                type: UPDATE_CART,
+                payload: response.data.cart.length
+            });
+            return response.data.cart.length;
+        } catch (error) {
+            // handle error
+        }
+    };
+
+    const addItemToCart = async (userId, artworkId) => {
+        try {
+            await Service.put(`/addToCart/${userId}/${artworkId}`);
+            const items = await getItemsInCart(userId);
+            dispatch({
+                type: UPDATE_CART,
+                payload: items + 1
+            });
+        } catch (error) {
+            // handle error
+        }
+    };
+
+    const removeItemFromCart = async (userId, artworkId) => {
+        try {
+            await Service.put(`/deleteFromCart/${userId}/${artworkId}`);
+            const items = await getItemsInCart(userId);
+            dispatch({
+                type: UPDATE_CART,
+                payload: items - 1
+            });
+        } catch (error) {
+            // handle error
         }
     }
 
     return (
         <CartContext.Provider
             value={ {
-                cartItems: state.cartItems,
-                getUserCart
-            }}
+                itemsInCart: state.itemsInCart,
+                getUserCart,
+                getItemsInCart,
+                addItemToCart,
+                removeItemFromCart
+            } }
         >
-            {props.children}
+            {props.children }
         </CartContext.Provider>
-    )
+    );
 };
 
 export default CartState;

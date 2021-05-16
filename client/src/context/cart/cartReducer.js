@@ -1,23 +1,13 @@
 import {
-    GET_USER_CART,
-    ADD_ITEM,
-    DELETE_ITEM
+    UPDATE_CART
 } from '../../types';
 
 const CartReducer = (state, action) => {
     switch (action.type) {
-        case GET_USER_CART:
+        case UPDATE_CART:
             return {
                 ...state,
-                cartItems: action.payload
-            };
-        case ADD_ITEM:
-            return {
-                ...state
-            };
-        case DELETE_ITEM:
-            return {
-                ...state
+                itemsInCart: action.payload
             };
         default:
             return state;

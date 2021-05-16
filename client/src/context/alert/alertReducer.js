@@ -11,7 +11,7 @@ const AlertReducer = (state, action) => {
                 alert: null
             }
         default:
-            return state
+            return state;
     }
 }
 

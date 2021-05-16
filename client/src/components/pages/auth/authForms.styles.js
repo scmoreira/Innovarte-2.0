@@ -6,7 +6,7 @@ const useStyles = makeStyles(theme => ({
     background: 'url("https://www.transparenttextures.com/patterns/brick-wall.png")'
   },
   paper: {
-    margin: '5px auto',
+    margin: '10px auto',
     padding: '10px 0 50px',
     display: 'flex',
     flexDirection: 'column',
