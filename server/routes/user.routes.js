@@ -104,7 +104,7 @@ router.get('/cart/:user_id', (req, res) => {
     }
 
     User
-        .findById(userId)
+        .findById(userId, {cart: 1})
         .populate('cart')
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
