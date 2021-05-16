@@ -35,7 +35,8 @@ const ItemCard = ({ item }) => {
     const { image, title, description, price } = item;
     const classes = useStyles();
 
-    const handleDelete = () => {
+    const handleDelete = e => {
+        e.preventDefault();
         removeItemFromCart(user._id, item._id);
     }
 
@@ -55,8 +56,8 @@ const ItemCard = ({ item }) => {
                             <Typography variant='body2' paragraph>
                                 Price: { price } EUR
                             </Typography>
-                            <Typography variant='body2'>
-                                <DeleteButton onClick={handleDelete} />
+                            <Typography variant='body2' onClick={ handleDelete } >
+                                <DeleteButton  />
                             </Typography>
                         </CardContent>
                     </div>

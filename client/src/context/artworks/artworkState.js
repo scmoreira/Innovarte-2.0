@@ -74,6 +74,7 @@ const ArtworkState = props => {
         }
     };
 
+
     return (
         <ArtworkContext.Provider
             value={ {

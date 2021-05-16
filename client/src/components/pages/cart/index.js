@@ -14,7 +14,7 @@ import useStyles from './cart.styles';
 const Cart = () => {
 
     const { user } = useContext(AuthContext);
-    const { getUserCart } = useContext(CartContext);
+    const { itemsInCart, getUserCart } = useContext(CartContext);
 
     const [items, setItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
@@ -36,6 +36,13 @@ const Cart = () => {
         }
         //eslint-disable-next-line
     }, []);
+
+    useEffect(() => {
+        if (itemsInCart !== items) {
+            printCart();
+        }
+        //eslint-disable-next-line
+    }, [itemsInCart]);
 
     return (
         <div>
