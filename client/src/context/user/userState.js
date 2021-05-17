@@ -10,7 +10,7 @@ import {
     GET_ALL_USER_ARTWORKS,
     GET_ON_SELL_ARTWORKS,
     GET_SOLD_ARTWORKS,
-    UPDATE_BUYED_ARTWORKS,
+    GET_BUYED_ARTWORKS,
     ERROR
 } from '../../types';
 
@@ -22,7 +22,6 @@ const UserState = props => {
         onSellArtworks: [],
         soldArtworks: [],
         buyedArtworks: [],
-        inCartArtworks: [],
         message: null
     };
 
@@ -30,7 +29,7 @@ const UserState = props => {
 
     const editProfile = async userId => {
         try {
-            const response = await Service.post(`/editProfile/${userId}`);
+            const response = await Service.put(`/editProfile/${userId}`);
             dispatch({
                 type: EDIT_PROFILE,
                 payload: response.data
@@ -100,13 +99,27 @@ const UserState = props => {
         }
     };
 
+    const getBuyedArtworks = async userId => {
+        try {
+            const response = await Service.get(`/buyedArtworks/${userId}`);
+            dispatch({
+                type: GET_BUYED_ARTWORKS,
+                payload: response.data.buyed
+            });
+        } catch (error) {
+            const alert = {
+                message: error.response.data.message,
+            };
+            dispatch({
+                type: ERROR,
+                payload: alert
+            });
+        }
+    }
+
     const updateBuyedArtworks = async (userId, artworkId) => {
         try {
-            const response = await Service.post(`/updateBuyedArtworks/${userId}/${artworkId}`);
-            dispatch({
-                type: UPDATE_BUYED_ARTWORKS,
-                payload: response.data
-            });
+            await Service.put(`/updateBuyedArtworks/${userId}/${artworkId}`);
         } catch (error) {
             const alert = {
                 message: error.response.data.message,
@@ -126,12 +139,12 @@ const UserState = props => {
                 onSellArtworks: state.onSellArtworks,
                 soldArtworks: state.soldArtworks,
                 buyedArtworks: state.buyedArtworks,
-                inCartArtworks: state.inCartArtworks,
                 message: state.message,
                 editProfile,
                 getAllUserArtworks,
                 getOnSellArtworks,
                 getSoldArtworks,
+                getBuyedArtworks,
                 updateBuyedArtworks
             } }
         >
