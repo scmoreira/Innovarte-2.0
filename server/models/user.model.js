@@ -42,9 +42,10 @@ const userSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Artwork'
     }],
-    buyed: {
-        type: [String],
-    },
+    buyed: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Artwork'
+    }],
     sold: {
         type: [String],
     },
