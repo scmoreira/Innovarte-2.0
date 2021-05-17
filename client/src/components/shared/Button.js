@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 import AddShoppingCartOutlinedIcon from '@material-ui/icons/AddShoppingCartOutlined';
+import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
 import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 
@@ -29,20 +30,33 @@ export const DeleteButton = () => {
                 <DeleteForeverOutlinedIcon color='error' fontSize='large' />
             </IconButton>
         </Tooltip>
-        
     );
-}
+};
 
 export const AddToCartButton = props => {
     return (
-        <Tooltip title='Add' arrow onClick={props.onClick}>
-            <IconButton aria-label='add to shopping cart'>
-                <AddShoppingCartOutlinedIcon color='primary' fontSize='large'/>
-            </IconButton> 
+        <Tooltip title='Add' arrow onClick={ props.onClick }>
+            <IconButton aria-label='add item to cart'>
+                <AddShoppingCartOutlinedIcon color='primary' fontSize='large' />
+            </IconButton>
         </Tooltip>
-        
     );
-}
+};
+
+export const AddButton = props => {
+    const classes = useStyles();
+    return (
+        <Button
+            variant='contained'
+            color='primary'
+            aria-label={ props.ariaLabel }
+            startIcon={ <AddOutlinedIcon /> }
+            className={ classes.textButton }
+        >
+            {props.text }
+        </Button>
+    );
+};
 
 export const GoBackButton = props => {
     const classes = useStyles();
@@ -50,28 +64,30 @@ export const GoBackButton = props => {
         <Button
             variant='contained'
             color='primary'
-            startIcon={<ReplyOutlinedIcon />}
-            className={classes.textButton}
-            onClick={() => props.history.goBack()}
+            startIcon={ <ReplyOutlinedIcon /> }
+            className={ classes.textButton }
+            onClick={ () => props.history.goBack() }
         >
-           Go Back
+            Go Back
         </Button>
     );
-}
+};
 
-export const EditButton = () => {
+export const EditButton = props => {
     const classes = useStyles();
     return (
         <Button
             variant='contained'
             color='primary'
-            startIcon={<EditOutlinedIcon />}
-            className={classes.textButton}
+            aria-label={ props.ariaLabel }
+            startIcon={ <EditOutlinedIcon /> }
+            className={ classes.textButton }
+            onClick={ props.onClick }
         >
-           Edit
+            { props.text }
         </Button>
     );
-}
+};
 
 export const SubmitButton = props => {
     const classes = useStyles();
@@ -81,9 +97,10 @@ export const SubmitButton = props => {
             fullWidth
             variant='contained'
             color='primary'
-            className={classes.submitButton}
+            className={ classes.submitButton }
+            onClick={ props.onClick }
         >
-            {props.text}
+            {props.text }
         </Button>
-    ); 
-}
+    );
+};
