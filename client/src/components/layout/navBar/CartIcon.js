@@ -15,7 +15,7 @@ const CartIcon = () => {
 
     const { user } = useContext(AuthContext);
     const { itemsInCart, getItemsInCart } = useContext(CartContext);
- 
+
     const [items, setItems] = useState(0);
 
     const trigger = useScrollTrigger({ threshold: 100 });
@@ -28,7 +28,7 @@ const CartIcon = () => {
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     useEffect(() => {
         if (user) {
@@ -37,22 +37,23 @@ const CartIcon = () => {
         return () => setItems(0);
         //eslint-disable-next-line
     }, [user, itemsInCart]);
-    
+
     return (
-        <IconButton
-            className= { trigger ? `${classes.cart} ${classes.active}` : classes.cart}
-            aria-label='cart'
-            component={Link}
-            to='/cart'
-        >
-            <Badge
-                badgeContent={items}
-                className={classes.badge}
-                color='secondary'
+        <div className={ trigger ? `${classes.cart} ${classes.active}` : classes.cart }>
+            <IconButton
+                aria-label='cart'
+                component={ Link }
+                to='/cart'
             >
-                <ShoppingCartOutlinedIcon />
-            </Badge>
-        </IconButton>
+                <Badge
+                    badgeContent={ items }
+                    className={ classes.badge }
+                    color='secondary'
+                >
+                    <ShoppingCartOutlinedIcon />
+                </Badge>
+            </IconButton>
+        </div>
     );
 };
 

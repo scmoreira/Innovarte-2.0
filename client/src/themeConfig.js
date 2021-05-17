@@ -23,7 +23,7 @@ const theme = createMuiTheme({
         h3: "'Allura', cursive",
         h4: "'Allura', cursive",
         h5: "'Allura', cursive",
-        h6: "'Allura', cursive"
+        h6: "'Allura', cursive",
     }
 });
 

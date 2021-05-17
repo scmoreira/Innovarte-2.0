@@ -13,8 +13,7 @@ import useStyles from './artworks.styles';
 
 const ArtworkFilters = () => {
 
-    const artworkContext = useContext(ArtworkContext);
-    const { artists, getArtworksOnSell, getArtworksByTag, getArtworksByArtist, getArtists } = artworkContext;
+    const { artists, getArtworksOnSell, getArtworksByTag, getArtworksByArtist, getArtists } = useContext(ArtworkContext);
 
     const artistOptions = { options: artists.map((option) => option.artist) };
     const tags = ['All', 'Painting', 'Sculpture', 'Drawing', 'Crafts', 'Photography', 'Other'];
@@ -29,7 +28,6 @@ const ArtworkFilters = () => {
 
     const handleArtistFilter = (event, artist) => {
         event.preventDefault();
-
         if (artist === null) {
             getArtworksOnSell();
         }
@@ -41,7 +39,6 @@ const ArtworkFilters = () => {
     const handleTagFilter = event => {
         let tag = event.target.value;
         setTag(tag);
-
         if (tag === 'All') {
             getArtworksOnSell();
         }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -8,48 +8,72 @@ import useStyles from './cart.styles';
 
 const PaymentForm = () => {
 
+    const [paymentDetails, setPaymentDetails] = useState({
+        cardHolder: '',
+        cardNumber: '',
+        expDate: '',
+        cvv: ''
+    });
+
     const classes = useStyles();
-    
-    return(
+
+    const handleChange = e => {
+        setPaymentDetails({
+            ...paymentDetails,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    return (
         <>
-            <Typography variant='h3' gutterBottom>Método de pago</Typography>
-            <Grid container spacing={2} component='form' className={classes.form}>
-                <Grid item xs={12} md={6}>
+            <Typography variant='h3' gutterBottom>Payment Data</Typography>
+            <Grid container spacing={ 2 } component='form' className={ classes.form }>
+                <Grid item xs={ 12 } md={ 6 }>
                     <TextField
                         required
-                        id='cardName'
+                        name='cardHolder'
                         label='Cardholder'
                         fullWidth
-                        autoComplete='cc-name'
-                        variant='outlined' />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <TextField
-                        required
-                        id='cardNumber'
-                        label='Card Number'
-                        fullWidth
-                        autoComplete='cc-number'
                         variant='outlined'
+                        onChange={ handleChange }
                     />
                 </Grid>
-                <Grid item xs={12} md={6}>
-                    <TextField required id='expDate' label='Expiration date' fullWidth autoComplete='cc-exp' variant='outlined' />
-                </Grid>
-                <Grid item xs={12} md={6}>
+                <Grid item xs={ 12 } md={ 6 }>
                     <TextField
                         required
-                        id='cvv'
+                        name='cardNumber'
+                        label='Card Number'
+                        placeholder='1234 1234 1234 1234'
+                        fullWidth
+                        variant='outlined'
+                        onChange={ handleChange }
+                    />
+                </Grid>
+                <Grid item xs={ 12 } md={ 6 }>
+                    <TextField
+                        required
+                        name='expDate'
+                        label='Expiration Date'
+                        placeholder='MM/AA'
+                        fullWidth
+                        variant='outlined'
+                        onChange={ handleChange }
+                    />
+                </Grid>
+                <Grid item xs={ 12 } md={ 6 }>
+                    <TextField
+                        required
+                        name='cvv'
                         label='CVV'
                         helperText='* Verification code'
                         fullWidth
-                        autoComplete='cc-csc'
                         variant='outlined'
+                        onChange={ handleChange }
                     />
                 </Grid>
             </Grid>
         </>
-    )
-}
-    
+    );
+};
+
 export default PaymentForm;

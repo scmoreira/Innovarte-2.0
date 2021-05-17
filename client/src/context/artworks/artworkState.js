@@ -10,10 +10,9 @@ import {
     GET_ARTWORKS_BY_ARTIST,
     GET_ARTISTS,
     GET_ARTWORKS_BY_TAG,
-    // SET_SOLD_ARTWORK,
-    // ADD_ARTWORK,
-    // EDIT_ARTWORK,
-    // DELETE_ARTWORK,
+    ADD_ARTWORK,
+    EDIT_ARTWORK,
+    DELETE_ARTWORK,
 } from '../../types';
 
 const ArtworkState = props => {
@@ -74,6 +73,38 @@ const ArtworkState = props => {
         }
     };
 
+    const updateArtworkState = async artworkId => {
+        try {
+            await Service.put(`/artworkSold/${artworkId}`);
+            await getArtworksOnSell();
+        } catch (error) {
+            // Crear alerta
+        }
+    };
+
+    const addNewArtwork = async artwork => {
+        try {
+            await Service.post('/newArtwork', artwork);
+        } catch (error) {
+            // Crear alerta
+        }
+    };
+
+    const editArtwork = async( artworkId, details) => {
+        try {
+            await Service.put(`/editArtwork/${artworkId}`, details);
+        } catch (error) {
+            // Crear alerta
+        }
+    };
+
+    const deleteArtwork = async artworkId => {
+        try {
+            await Service.delete(`/${artworkId}/deleteArtwork`);
+        } catch (error) {
+            // Crear alerta
+        }
+    };
 
     return (
         <ArtworkContext.Provider
@@ -85,6 +116,10 @@ const ArtworkState = props => {
                 getArtworksByArtist,
                 getArtists,
                 getArtworksByTag,
+                updateArtworkState,
+                addNewArtwork,
+                editArtwork,
+                deleteArtwork
             } }
         >
             {props.children }

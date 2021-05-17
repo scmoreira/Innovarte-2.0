@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 
 import AuthContext from '../../../context/auth/authContext';
 import CartContext from '../../../context/cart/cartContext';
@@ -38,7 +38,7 @@ const ItemCard = ({ item }) => {
     const handleDelete = e => {
         e.preventDefault();
         removeItemFromCart(user._id, item._id);
-    }
+    };
 
     return (
         <Grid item xs={ 12 } md={ 10 }>
@@ -57,13 +57,14 @@ const ItemCard = ({ item }) => {
                                 Price: { price } EUR
                             </Typography>
                             <Typography variant='body2' onClick={ handleDelete } >
-                                <DeleteButton  />
+                                <DeleteButton />
                             </Typography>
                         </CardContent>
                     </div>
                 </Card>
             </CardActionArea>
         </Grid>
+
     );
 };
 

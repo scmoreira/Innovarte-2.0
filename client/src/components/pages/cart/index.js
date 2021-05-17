@@ -2,7 +2,9 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import AuthContext from '../../../context/auth/authContext';
+import UserContext from '../../../context/user/userContext';
 import CartContext from '../../../context/cart/cartContext';
+import ArtworkContext from '../../../context/artworks/artworkContext';
 
 import Checkout from './Checkout';
 import ItemCard from './ItemCard';
@@ -14,10 +16,17 @@ import useStyles from './cart.styles';
 const Cart = () => {
 
     const { user } = useContext(AuthContext);
-    const { itemsInCart, getUserCart } = useContext(CartContext);
+    const { updateBuyedArtworks } = useContext(UserContext);
+    const { updateArtworkState } = useContext(ArtworkContext);
+    const {
+        itemsInCart,
+        getUserCart,
+        removeItemFromCart
+    } = useContext(CartContext);
 
     const [items, setItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
+    
     const classes = useStyles();
 
     const printCart = async () => {
@@ -30,6 +39,15 @@ const Cart = () => {
         }
     };
 
+    const handleSubmit = e => {
+        e.preventDefault();
+        items.forEach(async item => {
+            await updateArtworkState(item._id);
+            await removeItemFromCart(user._id, item._id);
+            await updateBuyedArtworks(user._id, item._id);
+        });
+    }
+
     useEffect(() => {
         if (user) {
             printCart();
@@ -38,7 +56,7 @@ const Cart = () => {
     }, []);
 
     useEffect(() => {
-        if (itemsInCart !== items) {
+        if (user && itemsInCart !== items) {
             printCart();
         }
         //eslint-disable-next-line
@@ -65,7 +83,7 @@ const Cart = () => {
                         { items.length > 0 && items.map(item => <ItemCard key={ item._id } item={ item } />) }
                         <div className='summary'>
                             <h3>Total:  <EuroOutlinedIcon /> { totalPrice }</h3>
-                            <SubmitButton text='Confirm' />
+                            <SubmitButton text='Buy' onClick={handleSubmit} />
                         </div>
                     </div>
                 </section>

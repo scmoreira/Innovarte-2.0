@@ -4,9 +4,10 @@ import { Route, Redirect } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 
 const PrivateRoute = ({ component: Component, ...props }) => {
-    
-    const authContext = useContext(AuthContext);
-    const { authenticated, loading, authenticateUser } = authContext;
+    const {
+        authenticated,
+        loading,
+        authenticateUser } = useContext(AuthContext);
 
     useEffect(() => {
         authenticateUser();

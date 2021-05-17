@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     cardRoot: {
         maxWidth: 400,
         height: 'auto',
-        margin: '2% 0',
+        margin: '2% 2%',
         textAlign: 'center',
         transition: 'transform 1s',
 
@@ -38,7 +38,10 @@ const useStyles = makeStyles(theme => ({
     },
     cardContent: {
         paddingBottom: 0,
-        color: theme.palette.text.terciary
+        color: theme.palette.text.primary,
+        '& p': {
+            color: theme.palette.text.terciary,
+        }
     },
     cardMedia: {
         minWidth: 200,

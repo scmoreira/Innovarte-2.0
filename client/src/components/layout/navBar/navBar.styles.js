@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
         flexDirection: 'row',
@@ -41,8 +41,8 @@ const useStyles = makeStyles( theme => ({
     },
     navLinks: {
         size: '18px',
-        marginLeft: '38px',
         fontWeight: 700,
+        padding: '6px 20px',
         '&:hover': {
             color: theme.palette.primary.dark,
         }
@@ -62,10 +62,13 @@ const useStyles = makeStyles( theme => ({
         }
     },
     cart: {
-        color: theme.palette.primary.main,
+        marginLeft: '50px',
+        '& a': {
+            color: theme.palette.primary.main
+        },
         '&:hover': {
             color: theme.palette.primary.dark,
-        }        
+        }
     },
     badge: {
         right: -3,
@@ -79,7 +82,7 @@ const useStyles = makeStyles( theme => ({
     drawContainer: {
         display: 'flex',
         flexDirection: 'column',
-        alignContent: 'center',
+        alignItems: 'center',
         padding: '20px 25px'
     },
     menuIcon: {

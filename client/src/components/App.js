@@ -12,7 +12,7 @@ import Navbar from './layout/navBar';
 import Home from './pages/home';
 import Signup from './pages/auth/Signup';
 import Login from './pages/auth/Login';
-import ArtworksList from './pages/artworks/ArtworksList';
+import Artworks from './pages/artworks/Artworks';
 import ArtworkDetails from './pages/artworks/ArtworkDetails';
 import UserProfile from './pages/userProfile/';
 import Cart from './pages/cart';
@@ -39,7 +39,7 @@ function App() {
                       <Route exact path='/' component={ Home } />
                       <Route exact path='/signup' component={ Signup } />
                       <Route exact path='/login' component={ Login } />
-                      <Route exact path='/artworks' component={ ArtworksList } />
+                      <Route exact path='/artworks' component={ Artworks } />
                       <Route exact path='/artworks/details/:artwork_id' component={ ArtworkDetails } />
                       <Route exact path='/cart' component={ Cart } />
                       <PrivateRoute exact path='/profile' component={ UserProfile } />

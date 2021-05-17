@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import AuthContext from '../../../context/auth/authContext';
 import CartContext from '../../../context/cart/cartContext';
@@ -13,6 +13,7 @@ const ArtworkDetails = props => {
 
     const { user } = useContext(AuthContext);
     const { addItemToCart } = useContext(CartContext);
+
     const [isAdded, setIsAdded] = useState(false);
     const [error, setError] = useState(false);
 
@@ -29,12 +30,18 @@ const ArtworkDetails = props => {
         else {
             setError(true);
         }
+    };
 
+    const cleanState = () => {
         setTimeout(() => {
             setIsAdded(false);
             setError(false);
-        }, 3000);
-    };
+        }, 5000);
+    }
+
+    useEffect(() => {
+        cleanState();
+    }, []);
 
     return (
         <Modal
