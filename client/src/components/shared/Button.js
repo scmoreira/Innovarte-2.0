@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const DeleteButton = () => {
     return (
-        <Tooltip title='Delete' arrow>
+        <Tooltip title='Warnin! You are about to Delete' arrow>
             <IconButton aria-label='delete'>
                 <DeleteForeverOutlinedIcon color='error' fontSize='large' />
             </IconButton>
@@ -35,7 +35,7 @@ export const DeleteButton = () => {
 
 export const AddToCartButton = props => {
     return (
-        <Tooltip title='Add' arrow onClick={ props.onClick }>
+        <Tooltip title='Add to cart' arrow onClick={ props.onClick }>
             <IconButton aria-label='add item to cart'>
                 <AddShoppingCartOutlinedIcon color='primary' fontSize='large' />
             </IconButton>
@@ -52,6 +52,7 @@ export const AddButton = props => {
             aria-label={ props.ariaLabel }
             startIcon={ <AddOutlinedIcon /> }
             className={ classes.textButton }
+            onClick={ props.onClick }
         >
             {props.text }
         </Button>

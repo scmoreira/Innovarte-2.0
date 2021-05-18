@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
-
     root: {
         '& section': {
             margin: '3%',
@@ -16,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     },
 
     /* User Info */
-    card: {
+    userCard: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
@@ -34,7 +33,7 @@ const useStyles = makeStyles(theme => ({
             }
         },
     },
-    avatar: {
+    userAvatar: {
         color: theme.palette.text.secondary,
         backgroundColor: theme.palette.primary.main,
         width: '100px',
@@ -56,60 +55,6 @@ const useStyles = makeStyles(theme => ({
         '& button:last-child': {
             marginBottom: '0'
         }
-    },
-
-    /* Atworks List */
-    artworksRoot: {
-        margin: '10px auto',
-        backgroundColor: theme.palette.background.paper,
-        backgroundImage: 'url("https://www.transparenttextures.com/patterns/brick-wall.png")'
-    },
-    noItems: {
-        fontFamily: "'Montserrat', sans-serif",
-        marginTop: '1em',
-        marginLeft: '0.5em'
-    },
-
-    /* Artwork card */
-    profileCardRoot: {
-        width: 150,
-        margin: '2% 2%',
-        paddingBottom: '0.3%',
-        textAlign: 'center',
-        transition: 'transform 1s',
-        '&:hover': {
-            transform: 'scale(1.1)'
-        }
-    },
-    profileCardContent: {
-        color: theme.palette.text.primary,
-        padding: '10px 10px 0',
-        '& p': {
-            fontSize: '0.6rem',
-            color: theme.palette.text.terciary,
-            marginTop: 0
-        }
-    },
-    profileCardMedia: {
-        minWidth: 100,
-        maxWidth: '100%',
-        height: 150,
-        objectFit: 'contain',
-        border: '4px solid',
-        borderRadius: '2px',
-        boxShadow: 'inset 0 0 1px 4px #fff'
-    },
-    profileCardFoot: {
-        justifyContent: 'center',
-        paddingTop: 0,
-        '& button': {
-            size: 'small',
-            color: theme.palette.text.secondary,
-            fontSize: '0.5rem'
-        }
-    },
-    spanArtist: {
-        textTransform: "capitalize",
     },
 }));
 

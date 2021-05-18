@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 
-import ArtworkContext from '../../../context/artworks/artworkContext';
+import ArtworkContext from '../../../../context/artworks/artworkContext';
 
 import EditArtwork from './EditArtwork';
-import { EditButton, DeleteButton } from '../../shared/Button';
+import { EditButton, DeleteButton } from '../../../shared/Button';
 
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -12,22 +12,25 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 
-import useStyles from './profile.styles';
+import useStyles from './artworks.profile.styles';
 
-const ArtworkCardProfile = props => {
+const ArtworkCardProfile = ({ artwork, editable, refresh }) => {
 
     const { deleteArtwork } = useContext(ArtworkContext);
     const classes = useStyles();
 
     const [open, setOpen] = useState(false);
+    const [alert, showAlert] = useState(false);
+
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const { _id, title, image, artist, currency, price } = props.artwork;
+    const { _id, title, image, artist, currency, price } = artwork;
 
     const handleDelete = e => {
         e.preventDefault();
         deleteArtwork(_id);
+        refresh(true);
     };
 
     return (
@@ -51,20 +54,23 @@ const ArtworkCardProfile = props => {
                         </Typography>
                     </CardContent>
                 </CardActionArea>
-                { props.editable &&
+                { editable &&
                     <CardActions className={ classes.profileCardFoot }>
                         <EditButton
                             ariaLabel='edit this artwork'
                             text='Edit'
                             onClick={ handleOpen }
                         />
-                        <Typography variant='body2' onClick={ handleDelete } >
-                            <DeleteButton />
+                    <Typography
+                        variant='body2'
+                        onClick={ handleDelete }
+                    >
+                        <DeleteButton />
                         </Typography>
                     </CardActions>
                 }
             </Card>
-            {/* <EditArtwork open={ open } onClose={ handleClose } artwork={ props.artwork } /> */ }
+            {/* <EditArtwork open={ open } onClose={ handleClose } artwork={ artwork } /> */ }
         </>
     );
 };

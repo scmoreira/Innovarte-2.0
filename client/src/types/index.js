@@ -12,9 +12,7 @@ export const GET_ARTWORKS_BY_ARTIST = 'GET_ARTWORKS_BY_ARTIST'
 export const GET_ARTISTS = 'GET_ARTISTS'
 export const GET_ARTWORKS_BY_TAG = 'GET_ARTWORKS_BY_TAG'
 export const SET_SOLD_ARTWORK = 'SET_SOLD_ARTWORK'
-export const ADD_ARTWORK = 'ADD_ARTWORK'
-export const EDIT_ARTWORK = 'EDIT_ARTWORK'
-export const DELETE_ARTWORK = 'DELETE_ARTWORK'
+export const ERROR_MESSAGE = 'SUCCESS_MESSAGE'
 
 // User
 export const EDIT_PROFILE = 'EDIT_PROFILE'
@@ -26,6 +24,7 @@ export const ERROR = 'ERROR'
 
 // Cart
 export const UPDATE_CART = 'UPDATE_CART'
+export const MESSAGE_ERROR = 'MESSAGE_ERROR'
 
 // Order
 export const SET_SHIPPING_DETAILS = 'SET_SHIPPING_DETAILS'

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import ArtworkCardProfile from './ArtworkCardProfile';
+import ArtworkCardProfile from '../artworksProfile/ArtworkCardProfile';
 import Grid from '@material-ui/core/Grid';
-import useStyles from './profile.styles';
+import useStyles from './artworks.profile.styles';
 
-const Artworks = ({ artworkList, editable }) => {
+const Artworks = ({ artworkList, editable, setShouldRefresh }) => {
 
     const classes = useStyles();
 
@@ -13,7 +13,7 @@ const Artworks = ({ artworkList, editable }) => {
         <div className={ classes.artworksRoot }>
             <Grid container>
                 <Grid item sm={ 12 }>
-                    <Grid container justify='rigth'>
+                    <Grid container justify='flex-start'>
                         { artworkList.length < 1 ?
                             <p className={ classes.noItems}>
                                 No buyed works... { ' ' }
@@ -27,6 +27,7 @@ const Artworks = ({ artworkList, editable }) => {
                                     key={ artwork._id }
                                     artwork={ artwork }
                                     editable={ editable }
+                                    refresh={ setShouldRefresh }
                                 />
                             ))
                         }

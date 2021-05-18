@@ -30,8 +30,17 @@ const AddressForm = () => {
 
     return (
         <>
-            <Typography variant='h3' gutterBottom>Shipping Address</Typography>
-            <Grid container spacing={ 2 } component='form' className={ classes.form }>
+            <Typography
+                variant='h3' gutterBottom
+            >
+                Shipping Address
+            </Typography>
+            <Grid
+                container
+                spacing={ 2 }
+                component='form'
+                className={ classes.form }
+            >
                 <Grid item xs={ 12 } md={ 6 }>
                     <TextField
                         required

@@ -4,7 +4,7 @@ import AuthContext from '../../../context/auth/authContext';
 import UserContext from '../../../context/user/userContext';
 
 import UserInfo from './UserInfo';
-import Artworks from './ArtworkList';
+import Artworks from './artworksProfile/ArtworkListProfile';
 import useStyles from './profile.styles';
 
 const UserProfile = () => {
@@ -24,6 +24,7 @@ const UserProfile = () => {
     const [buyed, setBuyed] = useState([]);
     const [onSell, setOnSell] = useState([]);
     const [sold, setSold] = useState([]);
+    const [shouldRefresh, setShouldRefresh] = useState(false);
 
     const loadArtworks = async () => {
         await getBuyedArtworks(user._id);
@@ -35,8 +36,12 @@ const UserProfile = () => {
         if (user) {
             loadArtworks();
         }
+        if (shouldRefresh) {
+            loadArtworks();
+        }
+        return () => setShouldRefresh(false);
         //eslint-disable-next-line
-    }, []);
+    }, [shouldRefresh]);
 
     useEffect(() => {
         setBuyed(buyedArtworks);
@@ -46,19 +51,31 @@ const UserProfile = () => {
 
     return (
         <div className={ classes.root }>
-            <UserInfo />
+            <UserInfo setShouldRefresh={ setShouldRefresh } />
             <section>
                 <h2>Your shopping</h2>
-                <Artworks artworkList={ buyed } editable={ false } />
+                <Artworks
+                    artworkList={ buyed }
+                    editable={ false }
+                    refresh={ setShouldRefresh }
+                />
             </section>
             {user.role === 'artist' && <>
                 <section>
                     <h2>Your artworks on sell</h2>
-                    <Artworks artworkList={ onSell } editable={ true } />
+                    <Artworks
+                        artworkList={ onSell }
+                        editable={ true }
+                        setShouldRefresh={ setShouldRefresh }
+                    />
                 </section>
                 <section>
                     <h2>Your sales</h2>
-                    <Artworks artworkList={ sold } editable={ false } />
+                    <Artworks
+                        artworkList={ sold }
+                        editable={ false }
+                        setShouldRefresh={ setShouldRefresh }
+                    />
                 </section>
             </> }
         </div>

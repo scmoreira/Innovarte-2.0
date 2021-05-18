@@ -20,8 +20,9 @@ import useStyles from './authForms.styles';
 
 const Signup = props => {
 
-  const authContext = useContext(AuthContext);
-  const alertContext = useContext(AlertContext);
+  const classes = useStyles();
+  const { authenticated, message, signup } = useContext(AuthContext);
+  const { alert, showAlert } = useContext(AlertContext);
 
   const [newUser, setNewUser] = useState({
     username: '',
@@ -31,11 +32,6 @@ const Signup = props => {
     lastName: '',
     role: ''
   });
-
-  const classes = useStyles();
-
-  const { authenticated, message, signup } = authContext;
-  const { alert, showAlert } = alertContext;
   const { username, email, password, firstName, lastName, role } = newUser;
 
   const handleChange = e => {
@@ -61,7 +57,13 @@ const Signup = props => {
   }, [message, authenticated, props.history]);
 
   return (
-    <Grid item className={ classes.root } md={ 10 } component={ Paper } elevation={ 3 }>
+    <Grid
+      item
+      md={ 10 }
+      className={ classes.root }
+      component={ Paper }
+      elevation={ 3 }
+    >
       <div className={ classes.paper }>
         <Avatar className={ classes.avatar }>
           <AssignmentIndOutlinedIcon />
@@ -69,7 +71,10 @@ const Signup = props => {
         <Typography component='h1' variant='h5'>
           Sign up
         </Typography>
-        <form className={ classes.form } onSubmit={ handleSubmit } >
+        <form
+          className={ classes.form }
+          onSubmit={ handleSubmit }
+        >
           <Grid container spacing={ 2 }>
             <Grid item xs={ 12 }>
               <TextField

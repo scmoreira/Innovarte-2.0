@@ -5,9 +5,7 @@ import {
     GET_ARTISTS,
     GET_ARTWORKS_BY_TAG,
     SET_SOLD_ARTWORK,
-    // ADD_ARTWORK,
-    // EDIT_ARTWORK,
-    // DELETE_ARTWORK,
+    ERROR_MESSAGE
     // ARTWORK_ERROR
 } from '../../types';
 
@@ -33,6 +31,11 @@ const ArtworkReducer = (state, action) => {
             return {
                 ...state,
                 artworks: action.payload
+            }
+        case ERROR_MESSAGE:
+            return {
+                ...state,
+                errorMessage: action.payload
             }
         default:
             return state;

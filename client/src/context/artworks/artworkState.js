@@ -10,9 +10,7 @@ import {
     GET_ARTWORKS_BY_ARTIST,
     GET_ARTISTS,
     GET_ARTWORKS_BY_TAG,
-    ADD_ARTWORK,
-    EDIT_ARTWORK,
-    DELETE_ARTWORK,
+    ERROR_MESSAGE
 } from '../../types';
 
 const ArtworkState = props => {
@@ -21,9 +19,30 @@ const ArtworkState = props => {
         artworks: [],
         artists: [],
         artwork: null,
+        errorMessage: null,
+        tagList: ['Painting', 'Sculpture', 'Drawing', 'Crafts', 'Photography', 'Other'],
+        currencies: ['BTC', 'CHF', 'CNY', 'EUR', 'GBP', 'JPY', 'RUB', 'USD']
     };
 
     const [state, dispatch] = useReducer(ArtworkReducer, initialState);
+
+    const getArtists = async () => {
+        try {
+            const response = await Service.get('/getArtists');
+            dispatch({
+                type: GET_ARTISTS,
+                payload: response.data
+            });
+        } catch (error) {
+            const alert = {
+                message: error.response.data.message,
+            };
+            dispatch({
+                type: ERROR_MESSAGE,
+                payload: alert
+            });
+        }
+    };
 
     const getArtworksOnSell = async () => {
         try {
@@ -33,7 +52,13 @@ const ArtworkState = props => {
                 payload: response.data
             });
         } catch (error) {
-            // Crear alerta
+            const alert = {
+                message: error.response.data.message,
+            };
+            dispatch({
+                type: ERROR_MESSAGE,
+                payload: alert
+            });
         }
     };
 
@@ -45,7 +70,13 @@ const ArtworkState = props => {
                 payload: response.data
             });
         } catch (error) {
-            // Crear alerta
+            const alert = {
+                message: error.response.data.message,
+            };
+            dispatch({
+                type: ERROR_MESSAGE,
+                payload: alert
+            });
         }
     };
 
@@ -57,19 +88,13 @@ const ArtworkState = props => {
                 payload: response.data
             });
         } catch (error) {
-            // Crear alerta
-        }
-    };
-
-    const getArtists = async () => {
-        try {
-            const response = await Service.get('/getArtists');
+            const alert = {
+                message: error.response.data.message,
+            };
             dispatch({
-                type: GET_ARTISTS,
-                payload: response.data
+                type: ERROR_MESSAGE,
+                payload: alert
             });
-        } catch (error) {
-            // Create alert
         }
     };
 
@@ -78,7 +103,13 @@ const ArtworkState = props => {
             await Service.put(`/artworkSold/${artworkId}`);
             await getArtworksOnSell();
         } catch (error) {
-            // Crear alerta
+            const alert = {
+                message: error.response.data.message,
+            };
+            dispatch({
+                type: ERROR_MESSAGE,
+                payload: alert
+            });
         }
     };
 
@@ -86,7 +117,13 @@ const ArtworkState = props => {
         try {
             await Service.post('/newArtwork', artwork);
         } catch (error) {
-            // Crear alerta
+            const alert = {
+                message: error.response.data.message,
+            };
+            dispatch({
+                type: ERROR_MESSAGE,
+                payload: alert
+            });
         }
     };
 
@@ -94,7 +131,13 @@ const ArtworkState = props => {
         try {
             await Service.put(`/editArtwork/${artworkId}`, details);
         } catch (error) {
-            // Crear alerta
+            const alert = {
+                message: error.response.data.message,
+            };
+            dispatch({
+                type: ERROR_MESSAGE,
+                payload: alert
+            });
         }
     };
 
@@ -102,7 +145,13 @@ const ArtworkState = props => {
         try {
             await Service.delete(`/${artworkId}/deleteArtwork`);
         } catch (error) {
-            // Crear alerta
+            const alert = {
+                message: error.response.data.message,
+            };
+            dispatch({
+                type: ERROR_MESSAGE,
+                payload: alert
+            });
         }
     };
 
@@ -112,6 +161,9 @@ const ArtworkState = props => {
                 artworks: state.artworks,
                 artists: state.artists,
                 artwork: state.artwork,
+                errorMessage: state.errorMessage,
+                tagList: state.tagList,
+                currencies: state.currencies,
                 getArtworksOnSell,
                 getArtworksByArtist,
                 getArtists,
