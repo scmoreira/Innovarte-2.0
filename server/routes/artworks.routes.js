@@ -67,8 +67,8 @@ router.get('/getAvailableArtworks', (req, res) => {
 router.post('/newArtwork', uploader.single('image'), (req, res) => {
 
     const { title, description, price, currency, size, materials, artist, owner, tags } = req.body;
-    // const imageFile = req.file.url;
-    const imageFile = req.body.image;
+    const imageFile = req.file.url;
+    console.log(req.file.url)
 
     Artworks
         .create({ title, description, price, currency, size, materials, artist, owner, tags, image: imageFile })

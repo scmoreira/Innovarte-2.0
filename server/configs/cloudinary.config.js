@@ -10,8 +10,8 @@ cloudinary.config({
 
 const storage = cloudinaryStorage({
     cloudinary,
-    folder: 'innovarte',
-    allowedFormats: ['jpg', 'png'],
+    folder: 'innovarte-2.0',
+    allowedFormats: ['jpg', 'jpge', 'png', 'svg'],
     filename: function (req, file, cb) {
         cb(null, file.originalname)
     }

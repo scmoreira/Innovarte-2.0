@@ -12,7 +12,7 @@ const Artworks = require('./../models/artwork.model');
 // Update profile
 router.put('/editProfile/:user_id', uploader.single('avatar'), (req, res) => {
     const user = req.params.user_id;
-    const { username, email, password, role } = req.body;
+    const { firstName, lastName, username, email, password, role } = req.body;
     const img = req.file ? req.file.url : req.body.avatar;
 
     if (!mongoose.Types.ObjectId.isValid(user)) {
@@ -20,7 +20,7 @@ router.put('/editProfile/:user_id', uploader.single('avatar'), (req, res) => {
         return;
     }
     User
-        .findByIdAndUpdate(user, { username, email, password, role, avatar: img }, { new: true })
+        .findByIdAndUpdate(user, { firstName, lastName, username, email, password, role, avatar: img }, { new: true })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 });
