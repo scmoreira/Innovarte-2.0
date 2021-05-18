@@ -17,7 +17,6 @@ import {
 const UserState = props => {
 
     const initialState = {
-        userProfileDetails: null,
         allArtworks: [],
         onSellArtworks: [],
         soldArtworks: [],
@@ -27,9 +26,9 @@ const UserState = props => {
 
     const [state, dispatch] = useReducer(UserReducer, initialState);
 
-    const editProfile = async userId => {
+    const editProfile = async (userId, user) => {
         try {
-            const response = await Service.put(`/editProfile/${userId}`);
+            const response = await Service.put(`/editProfile/${userId}`, user);
             dispatch({
                 type: EDIT_PROFILE,
                 payload: response.data

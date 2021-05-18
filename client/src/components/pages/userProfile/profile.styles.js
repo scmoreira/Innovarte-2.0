@@ -56,6 +56,41 @@ const useStyles = makeStyles(theme => ({
             marginBottom: '0'
         }
     },
+
+    /* Edit profile form */
+    editProfileRoot: {
+        position: 'absolute',
+        top: '5%',
+        left: '20%',
+        width: '50%',
+        margin: '0 auto',
+        backgroundColor: theme.palette.background.paper,
+        backgroundImage: 'url("https://www.transparenttextures.com/patterns/brick-wall.png")',
+        border: `0.2vw solid ${theme.palette.primary.main}`,
+        boxShadow: theme.shadows[5],
+
+    },
+    editProfilePaper: {
+        margin: '10px auto',
+        padding: '10px 0 50px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        maxWidth: '75%',
+        minHeight: '600px'
+    },
+    editProfileForm: {
+        width: '100%',
+        marginTop: theme.spacing(3),
+        '& label': {
+            color: theme.palette.text.primary
+        }
+    },
+    spinner: {
+        display: 'flex',
+        justifyContent: 'center',
+        marginTop: '20px'
+    }
 }));
 
 export default useStyles;

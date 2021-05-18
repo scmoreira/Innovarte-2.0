@@ -3,6 +3,7 @@ import AuthContext from '../../../context/auth/authContext';
 
 import { EditButton, AddButton } from '../../shared/Button';
 import NewArtworkForm from './artworksProfile/NewArtwork';
+import EditProfileForm from './EditProfile';
 
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -10,21 +11,33 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
-import FaceOutlinedIcon from '@material-ui/icons/FaceOutlined';
 
 import useStyles from './profile.styles';
+
 
 const UserInfo = ({ setShouldRefresh }) => {
 
     const classes = useStyles();
     const { user } = useContext(AuthContext);
-    const [open, setOpen] = useState(false);
 
-    const handleOpen = () => setOpen(true);
+    const [userInfo, setUserInfo] = useState({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        username: user.username,
+        email: user.email,
+        avatar: user.avatar
+    });
+    const [open, setOpen] = useState(false);
+    const [modaltype, setModalType] = useState('');
+
+    const handleOpen = (open, modalType) => {
+        setOpen(open);
+        setModalType(modalType);
+    };
     const handleClose = () => {
         setOpen(false);
         setShouldRefresh(true);
-    }
+    };
 
     return (
         <div>
@@ -35,18 +48,18 @@ const UserInfo = ({ setShouldRefresh }) => {
                             <Avatar
                                 className={ classes.userAvatar }
                                 aria-label='avatar'
+                                src={ userInfo.avatar }
                             >
-                                <FaceOutlinedIcon />
                             </Avatar>
                         }
                     />
                     <div className={ classes.cardDetails }>
                         <CardContent>
                             <Typography component="h2" variant="h5">
-                                { user.firstName } { user.lastName }
+                                { userInfo.firstName } { userInfo.lastName }
                             </Typography>
                             <Typography variant="subtitle1" color="textSecondary">
-                                <span>{ user.role }</span> | { user.email }
+                                <span>{ userInfo.role }</span> | { userInfo.email }
                             </Typography>
                         </CardContent>
                     </div>
@@ -54,19 +67,28 @@ const UserInfo = ({ setShouldRefresh }) => {
                         <EditButton
                             ariaLabel='edit your profile'
                             text='Edit profile'
-                            onClick={ handleOpen }
-                            />
+                            onClick={ () => handleOpen(true, 'edit') }
+                        />
                         { user.role === 'artist' &&
                             <AddButton
-                            alt='add new artwork'
-                            text='New artwork'
-                            onClick={ handleOpen }
+                                alt='add new artwork'
+                                text='New artwork'
+                                onClick={ () => handleOpen(true, 'add') }
                             />
                         }
                     </div>
                 </Card>
             </Grid>
-            <NewArtworkForm open={ open } onClose={ handleClose } />
+            <EditProfileForm
+                open={ open && modaltype === 'edit' }
+                onClose={ handleClose }
+                refresh={ setShouldRefresh }
+            />
+            <NewArtworkForm
+                open={ open && modaltype === 'add' }
+                onClose={ handleClose }
+                refresh={ setShouldRefresh }
+            />
         </div>
     );
 };

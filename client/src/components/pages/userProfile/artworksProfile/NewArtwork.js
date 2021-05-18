@@ -26,10 +26,12 @@ const NewArtworkForm = props => {
         errorMessage,
         tagList,
         currencies,
-        addNewArtwork
+        addNewArtwork,
+        editArtwork
     } = useContext(ArtworkContext);
 
     const [isLoading, setIsLoading] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
     const [message, setMessage] = useState('');
     const [newArtwork, setNewArtwork] = useState({
         title: '',
@@ -56,13 +58,19 @@ const NewArtworkForm = props => {
         e.preventDefault();
 
         setIsLoading(true);
-        setMessage('Artwork added! Check your profile.');
 
         const uploadData = new FormData();
         Object.keys(newArtwork).forEach(key => {
             uploadData.append(key, newArtwork[key]);
         });
-        addNewArtwork(uploadData);
+
+        if (isEdit) {
+            editArtwork(props.artwork._id, uploadData);
+            setMessage('Artwork updated!');
+        } else {
+            addNewArtwork(uploadData);
+            setMessage('Artwork added! Check your profile.');
+        }
 
         setTimeout(() => {
             setIsLoading(false);
@@ -83,7 +91,6 @@ const NewArtworkForm = props => {
             artist: '',
             owner: ''
         });
-        setMessage('');
     };
 
     useEffect(() => {
@@ -95,6 +102,25 @@ const NewArtworkForm = props => {
         }
         //eslint-disable-next-line
     }, [errorMessage]);
+    
+    useEffect(() => {
+        if (user && props.artwork) {
+            setNewArtwork({
+                title: props.artwork.title,
+                image: props.artwork.image,
+                description: props.artwork.description,
+                size: props.artwork.size,
+                materials: props.artwork.materials,
+                currency: props.artwork.currency,
+                price: props.artwork.price,
+                tags: props.artwork.tags,
+                artist: props.artwork.artist,
+                owner: user._id
+            });
+            setIsEdit(true);
+        }
+        //eslint-disable-next-line
+    }, []);
 
     return (
         <Modal
@@ -228,7 +254,7 @@ const NewArtworkForm = props => {
                             </Grid>
                             <Grid item xs={ 12 } md={ 12 }>
                                 <TextField
-                                    required
+                                    required={isEdit ? false : true}
                                     type='file'
                                     fullWidth
                                     variant='outlined'
@@ -242,7 +268,7 @@ const NewArtworkForm = props => {
                         </div>
                         { (!isLoading && message) && <AlertSuccess text={ message } /> }
                         { alert && <AlertError text={ alert } /> }
-                        <SubmitButton text='Add artwork' />
+                        <SubmitButton text={isEdit ? 'Edit artwork' : 'Add artwork'} />
                     </form>
                 </div>
             </Grid>

@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 
 import ArtworkContext from '../../../../context/artworks/artworkContext';
 
-import EditArtwork from './EditArtwork';
+import NewArtwork from './NewArtwork';
 import { EditButton, DeleteButton } from '../../../shared/Button';
 
 import Card from '@material-ui/core/Card';
@@ -20,7 +20,6 @@ const ArtworkCardProfile = ({ artwork, editable, refresh }) => {
     const classes = useStyles();
 
     const [open, setOpen] = useState(false);
-    const [alert, showAlert] = useState(false);
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -70,7 +69,7 @@ const ArtworkCardProfile = ({ artwork, editable, refresh }) => {
                     </CardActions>
                 }
             </Card>
-            {/* <EditArtwork open={ open } onClose={ handleClose } artwork={ artwork } /> */ }
+            <NewArtwork open={ open } onClose={ handleClose } artwork={ artwork } />
         </>
     );
 };
